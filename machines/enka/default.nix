@@ -20,6 +20,7 @@
   ./discord
   ./docker
   ./dunst
+  ./dwm
   ./firefox
   ./fuzzel
   ./git
