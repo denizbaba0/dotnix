@@ -1,20 +1,26 @@
 { lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate3
 
 (systemConfiguration {
-  hardware.opengl = enabled {};
-  services.xserver = {
-    enable = true;
-    layout = "tr";
+  hardware.opengl = enabled {
+    # On 64-bit systems, if you want OpenGL for 32-bit programs 
+    # such as in Wine, you should also set the following:
+    driSupport32Bit = true;  
+  };
 
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [ i3status i3lock polybar ];
+  services.xserver = enabled {
+    layout = "tr";
+    videoDrivers = [ "nvidiaLegacy390" ]; # nvidia GT630
+    windowManager.xmonad = enabled {
+      # package = pkgs.i3-gaps;
+      # extraPackages = with pkgs; [ i3status i3lock polybar ];
     };
 
     displayManager = { 
       gdm = enabled {};
-      defaultSession = "none+i3";
+      defaultSession = "none+xmonad"; # nodesktopenv + xmonad
+      autoLogin = enabled {
+        user = "alice";
+      };
     };
   };
 })
