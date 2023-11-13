@@ -12,10 +12,9 @@ $env.ENV_CONVERSIONS.PATH = {
     }
 }
 
-def hx [...arguments] {
-    kitty @ set-spacing padding=0
-
-    ^hx $arguments
-
-    kitty @ set-spacing padding=10
-}
+## Sets kitty padding to 0
+# def hx [...arguments] {
+#     kitty @ set-spacing padding=0
+#     ^hx $arguments
+#     kitty @ set-spacing padding=10
+# }

@@ -1,7 +1,7 @@
 { lib, stdenv, pkgs, src }:
 
 let
-  custom = ./custom;
+  config = ./custom;
 in
 stdenv.mkDerivation {
   pname = "nvchad";
@@ -21,7 +21,7 @@ stdenv.mkDerivation {
     mkdir -p "$out/lua"
     cp -r $src/lua/core $out/lua/
     cp -r $src/lua/plugins $out/lua/
-    cp -r ${custom} "$out/lua/custom"
+    cp -r ${config} "$out/lua/custom"
   	# chmod -R +w $out/lua/custom
   '';
 

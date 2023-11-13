@@ -35,6 +35,7 @@
   ./openttd
   ./pipewire
   ./python
+  ./st
   ./steam
   ./steck
 

@@ -1,10 +1,6 @@
 { lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate3
 
-(
-let 
-  wallpaper = "~/Pictures/wallpapers/stairs.jpg"; 
-in
-systemConfiguration {
+( systemConfiguration {
   hardware.opengl = enabled {
     # On 64-bit systems, if you want OpenGL for 32-bit programs 
     # such as in Wine, you should also set the following:
@@ -33,10 +29,7 @@ systemConfiguration {
         {
           manage = "window"; # desktop or window
           name = "chadwm";
-          start = ''
-            feh --bg-fill ${wallpaper}
-
-          '';
+          start = lib.fileContents ./boot.sh;
         }
       ];
       autoLogin = enabled {
