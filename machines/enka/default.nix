@@ -16,28 +16,22 @@
 
 (imports [
   ./bat
-  ./blueman
   ./discord
   ./docker
   ./dunst
   ./dwm
   ./firefox
-  ./fuzzel
   ./git
   ./github
   ./gtk
   ./helix
-  ./hyprland
   ./kitty
   ./networkmanager
   ./nvim
   ./nushell
-  ./openttd
   ./pipewire
   ./python
   ./st
-  ./steam
-  ./steck
 
   ./fonts.nix
   ./localisation.nix
