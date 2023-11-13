@@ -1,6 +1,10 @@
-{ lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate
+{ lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate3
 
-(systemConfiguration {
+(
+let 
+  wallpaper = "~/Pictures/wallpapers/stairs.jpg"; 
+in
+systemConfiguration {
   hardware.opengl = enabled {
     # On 64-bit systems, if you want OpenGL for 32-bit programs 
     # such as in Wine, you should also set the following:
@@ -24,11 +28,31 @@
 
     displayManager = { 
       gdm = enabled {};
-      defaultSession = "none+dwm"; # nodesktopenv + wm ("none+i3")
+      defaultSession = "none+chadwm"; # nodesktopenv + wm ("none+i3")
+      session = [ # https://mynixos.com/nixpkgs/option/services.xserver.displayManager.session
+        {
+          manage = "window"; # desktop or window
+          name = "chadwm";
+          start = ''
+            feh --bg-fill ${wallpaper}
+
+          '';
+        }
+      ];
       autoLogin = enabled {
         user = "nixos";
       };
     };
+  };
+})
+
+(homeConfiguration "nixos" {
+  home.file.".config/chadwm".source = ./config;
+  # using `services` instead of `packages` triggers picom on every boot
+  services.picom = enabled {
+    # backend = "glx";
+    fade = true;
+    vSync = true;
   };
 })
 
@@ -41,7 +65,7 @@
   imlib2
 
   # chadwm: X compositor: TODO: maybe look for a better option
-  picom-jonaburg
+  picom
 
   # chadwm: Image viewer + wallpaper setter: NOTE: Minimalist + Solid
   feh

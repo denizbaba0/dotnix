@@ -1,5 +1,13 @@
 # allow our nixpkgs import to be overridden if desired
-{ imlib2, libXinerama, libXft, libX11, gnumake, pkgs ? import <nixpkgs> {} }:
+{
+  acpi,
+  imlib2,
+  libXinerama,
+  libXft,
+  libX11,
+  gnumake,
+  pkgs ? import <nixpkgs> {}
+}:
 
 # let's write an actual basic derivation
 # this uses the standard nixpkgs mkDerivation function
@@ -11,7 +19,7 @@ pkgs.stdenv.mkDerivation {
   # sources that will be used for our derivation.
   src = ./config;
 
-  buildInputs = [ imlib2 libX11 libXft libXinerama gnumake ];
+  buildInputs = [ imlib2 libX11 libXft libXinerama gnumake acpi ];
 
   # see https://nixos.org/nixpkgs/manual/#ssec-install-phase
   # $src is defined as the location of our `src` attribute above
