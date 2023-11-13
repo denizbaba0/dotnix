@@ -42,23 +42,15 @@
 (homeConfiguration "nixos" {
   home.file.".config/chadwm".source = ./config;
   # using `services` instead of `packages` triggers picom on every boot
-  services.picom = enabled {
-    # backend = "glx";
-    fade = true;
-    vSync = true;
-  };
 })
 
-(with pkgs; homePackages "nixos" [
+ (with pkgs; homePackages "nixos" [
   # Dash TODO: rewrite these in nushell
   # Needed for small scripts like dwmbar, startup etc.
   dash
 
   # chadwm: imlib2
   imlib2
-
-  # chadwm: X compositor: TODO: maybe look for a better option
-  picom
 
   # chadwm: Image viewer + wallpaper setter: NOTE: Minimalist + Solid
   feh

@@ -1,20 +1,15 @@
 { lib, pkgs, systemPackages, homePackages, ... }: lib.recursiveUpdate
 
 (with pkgs; systemPackages [
-  fd
-  htop
   neofetch
   ripgrep
   tree
-
-  wine
 
   clang_16
   clang-tools_16
   go
   jdk
-  lld
-  maven
+  lld # linker
   vlang
   zig
 
@@ -28,18 +23,16 @@
 ])
 
 (with pkgs; homePackages "nixos" [
-  jetbrains.idea-ultimate
-
-  graphviz
-  # heroic
-  qbittorrent
   thunderbird
+  pantheon.elementary-files # file browser
+  simplescreenrecorder # Screen Recorder
+  telegram-desktop     # Telegram Client
+  gimp                 # Image Editor
 
-  kazam
-  krita
   obs-studio
 
   libreoffice
   hunspellDicts.en_US
+  # hunspellDicts.tr_TR # TODO: find the appropriate name
   hunspellDicts.en_GB-ize
 ])

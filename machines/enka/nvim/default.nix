@@ -12,18 +12,19 @@
     # '';
   };
 
-  programs = {
-    # nushell.environmentVariables.EDITOR = "nvim";
-    neovim = enabled {
-      ## alias vim=nvim
-      vimAlias = true;
-      # extraLuaConfig = lib.fileContents ./config/init.lua;
-      defaultEditor = true;
-    };
+  programs.neovim = enabled {
+    ## alias vim=nvim
+    vimAlias = true;
+    viAlias  = true;
+    # extraLuaConfig = lib.fileContents ./config/init.lua;
+    defaultEditor = true;
   };
 })
 
 (with pkgs; homePackages "nixos" [
+  # Fancy Neovide Nvim Client
+  neovide
+
   # CMAKE
   cmake-language-server
 

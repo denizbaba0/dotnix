@@ -7,9 +7,9 @@
 (homeConfiguration "nixos" {
   gtk = enabled {
     font = {
-      name    = "OpenSans";
-      package = pkgs.open-sans;
-      size    = 12;
+      name    = "JetBrainsMono";
+      package = pkgs.jetbrains-mono;
+      size    = 10;
     };
 
     iconTheme = {

@@ -29,9 +29,12 @@
   ./networkmanager
   ./nvim
   ./nushell
+  ./picom
   ./pipewire
   ./python
+  ./rofi
   ./st
+  ./sioyek
 
   ./fonts.nix
   ./localisation.nix
