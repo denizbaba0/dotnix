@@ -2,6 +2,13 @@
 
 (systemConfiguration {
   users.users.nixos.shell = pkgs.nushell;
+    environment.sessionVariables = rec {
+    # Not officially in the specification
+    XDG_BIN_HOME    = "$HOME/.local/bin";
+    PATH = [ 
+      "${XDG_BIN_HOME}"
+    ];
+  };
 })
 
 (homeConfiguration "nixos" {

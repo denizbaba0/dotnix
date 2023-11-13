@@ -29,8 +29,10 @@ pkgs.stdenv.mkDerivation {
     mkdir bin
     mv dwm bin/dwm
 
+    cp bin/dwm $out
+
     # mkdir -p /usr/local/bin/
-    ln -s bin/dwm $out/dwm
+    # ln -s bin/dwm $out/dwm
 
     # ln -s bin/dwm /usr/local/bin/dwm
     # install -D $src $out/bin/dwm

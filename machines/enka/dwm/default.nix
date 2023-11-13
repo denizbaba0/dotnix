@@ -1,4 +1,4 @@
-{ lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate3
+{ lib, pkgs, hyprland, theme, systemConfiguration, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate
 
 (systemConfiguration {
   hardware.opengl = enabled {
@@ -10,23 +10,26 @@
   services.xserver = enabled {
     layout = "tr";
     videoDrivers = [ "nvidiaLegacy390" ]; # nvidia GT630
-    windowManager.xmonad = enabled {
-      # package = pkgs.i3-gaps;
+
+    # # Enables Desktop Manager
+    # # Don't forget to set displayManager.defaultSession = "xfce";
+    # desktopManager = {
+    #   xfce = enabled {};
+    # };
+
+    windowManager.dwm = enabled {
+      package = pkgs.callPackage (import ./recompile.nix) {};
       # extraPackages = with pkgs; [ i3status i3lock polybar ];
     };
 
     displayManager = { 
       gdm = enabled {};
-      defaultSession = "none+xmonad"; # nodesktopenv + xmonad
+      defaultSession = "none+dwm"; # nodesktopenv + wm ("none+i3")
       autoLogin = enabled {
-        user = "alice";
+        user = "nixos";
       };
     };
   };
-})
-
-(homeConfiguration "nixos" {
-  home.file.".config/chadwm".source = pkgs.callPackage (import ./recompile.nix) {};
 })
 
 (with pkgs; homePackages "nixos" [
