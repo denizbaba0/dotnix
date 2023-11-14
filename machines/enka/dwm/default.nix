@@ -12,6 +12,9 @@ lib.recursiveUpdate3
 (
   let
     wallpaper = "~/Pictures/wallpapers/stairs.jpg";
+    xrandrsnip = ''
+      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary
+    '';
   in
     systemConfiguration {
       hardware.opengl = enabled {
@@ -21,6 +24,11 @@ lib.recursiveUpdate3
       };
 
       services.xserver = enabled {
+        xrandrHeads = [
+          # do `xrandr --query` to get the names of your screens
+          "HDMI-0"
+          "VGA-1"
+        ];
         layout = "tr";
         videoDrivers = ["nvidiaLegacy390"]; # nvidia GT630
 
@@ -48,15 +56,15 @@ lib.recursiveUpdate3
                 xrdb merge ~/.Xresources &
                 # xbacklight -set 10 & # TODO: not working (idk if essential)
                 xset r rate 200 50 &
-                ~/.config/chadwm/scripts/bar.sh &
+                dash ~/.config/chadwm/scripts/bar.sh &
                 # "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
                 # draw our wallpaper only if xinit is not set
                 if [ ! -f $XDG_CONFIG_HOME/sxmo/xinit ]; then
                   ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper}
                 fi
+                ${xrandrsnip}
 
                 # picom
-
                 # NOTE: picom autostarts in the way It's declared in `default.nix`
 
                 while type dwm >/dev/null; do dwm && continue || break; done

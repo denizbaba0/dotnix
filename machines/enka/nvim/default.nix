@@ -50,6 +50,8 @@
 
   # MARKDOWN
   marksman
+  proselint
+  deno      # for marksman fmt
 
   # NIX
   nil       # LSP

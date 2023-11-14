@@ -18,13 +18,15 @@ lib.recursiveUpdate
 (with pkgs;
   systemFonts [
     (nerdfonts.override {
+      # Nerd Fonts to install
       fonts = [
         "JetBrainsMono"
-        "Iosevka"
+        # "Iosevka"
       ];
     })
-    open-sans
-    noto-fonts
-    noto-fonts-cjk-sans
+    # open-sans
+    # noto-fonts
+    # noto-fonts-cjk-sans
+    iosevka
     noto-fonts-emoji
   ])

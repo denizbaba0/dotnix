@@ -1,35 +1,41 @@
-# My NixOS Configurations
+# _**`.NIX > *NIX`**_
 
-This repository contains my NixOS configurations for all my machines.
+NixOS is beyond a Linux distribution. Here is mine.
 
-## Bootstrapping
+## Building
 
 Here is the script you need to run to get this working:
 
-> [!IMPORTANT]
-> You **WILL NEED** `/etc/nixos/hardware-configuration.nix`, as this configuration
-> imports it, so you will need to run `sudo nixos-generate-config` if you've deleted them.
+### Notes:
+
+- I use two monitors in my setup (1920x1080, and a 20" square one) So my
+  configuration assumes that you have two monitors. Just edit
+  `dwm/default.nix - services.xserver.xrandrHeads` if you have a different
+  setup.
+
+> [!IMPORTANT] You **WILL NEED** `/etc/nixos/hardware-configuration.nix`, as
+> this configuration imports it, so you will need to run
+> `sudo nixos-generate-config` if you've deleted them.
 
 ```sh
-nix-shell -p git --command "git clone https://github.com/RGBCube/NixOSConfiguration && cd NixOSConfiguration"
-
+nix-shell -p git --command "git clone https://github.com/utfeight/dotnix && cd dotnix"
 ./rebuild.sh
 ```
 
-`machine-name` is a machine selected from the machines in the `machines` directory.
+`machine-name` is a machine selected from the machines in the `machines`
+directory.
 
-## Applying Changes
+## Configuration
 
-Lets say you have changed the configuration and want to apply the changes
-to your system. You would have to run the rebuild script:
+Lets say you have changed the configuration and want to apply the changes to
+your system. You would have to run the rebuild script:
 
 ```sh
+git add . # if you have added/removed new files
 ./rebuild.sh
 ```
 
-This runs the script interactively.
-
-You can also check how the script is used:
+This runs the script interactively. You can also check how the script is used:
 
 ```sh
 ./rebuild.sh --help
@@ -65,5 +71,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 ```
