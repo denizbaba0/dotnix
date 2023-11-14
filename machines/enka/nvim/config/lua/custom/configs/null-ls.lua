@@ -63,6 +63,11 @@ local sources = {
   -- Rust
   b.formatting.rustfmt, -- CHECKMEOUT: rust-tools.nvim does all for me!
 
+  -- Nix
+  b.code_actions.statix, -- Convenient Nix code actions
+  b.diagnostics.deadnix, -- Dead Code linter
+  b.formatting.alejandra, -- Formatter
+
   -- Python
   b.diagnostics.ruff,
   b.formatting.black, -- Note: flake8
@@ -72,7 +77,7 @@ local sources = {
   b.code_actions.ts_node_action,
 
   -- dictionary
-  b.hover.dictionary
+  b.hover.dictionary,
 }
 
 null_ls.setup {

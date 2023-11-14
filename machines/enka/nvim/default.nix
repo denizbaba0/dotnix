@@ -2,6 +2,7 @@
 
 (homeConfiguration "nixos" {
   home = {
+    # file.".config/nvim".source = ./config;
     file.".config/nvim".source = ./config;
     # activation.installNvimConfig = ''
     #   if [ ! -d "~/.config/nvim/" ]; 
@@ -23,33 +24,42 @@
 })
 
 (with pkgs; homePackages "nixos" [
-  # Fancy Neovide Nvim Client
-  neovide
+  # Clipboard Manager for X
+  xclip
+
+  # # Fancy Neovide Nvim Client
+  # neovide
+
+  # General
+  codespell
 
   # CMAKE
   cmake-language-server
 
-  # GO
-  gopls
+  # # GO
+  # gopls
 
-  # KOTLIN
-  kotlin-language-server
+  # # KOTLIN
+  # kotlin-language-server
 
-  # LATEX
-  texlab
+  # # LATEX
+  # texlab
 
   # LUA
-  lua-language-server
+  stylua
 
   # MARKDOWN
   marksman
 
   # NIX
-  nil
+  nil       # LSP
+  deadnix   # linter
+  statix    # linter
+  alejandra # formatter (written in rust)
 
   # RUST
   rust-analyzer
 
-  # ZIG
-  zls
+  # # ZIG
+  # zls
 ])

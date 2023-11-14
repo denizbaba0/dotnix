@@ -1,13 +1,16 @@
-{ lib, pkgs, systemPackages, homeConfiguration, enabled, ... }: lib.recursiveUpdate
-
-(with pkgs; systemPackages [
-  bat
-])
-
+{
+  lib,
+  pkgs,
+  systemPackages,
+  homeConfiguration,
+  enabled,
+  ...
+}:
+lib.recursiveUpdate
 (homeConfiguration "nixos" {
   programs.nushell.environmentVariables = {
     MANPAGER = ''"bat --plain --language man"'';
-    PAGER    = ''"bat --plain"'';
+    PAGER = ''"bat --plain"'';
   };
 
   programs.bat = enabled {

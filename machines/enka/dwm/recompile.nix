@@ -6,20 +6,18 @@
   libXft,
   libX11,
   gnumake,
-  pkgs ? import <nixpkgs> {}
+  pkgs ? import <nixpkgs> {},
 }:
-
 # let's write an actual basic derivation
 # this uses the standard nixpkgs mkDerivation function
 pkgs.stdenv.mkDerivation {
-
   # name of our derivation
   name = "dwm";
 
   # sources that will be used for our derivation.
   src = ./config;
 
-  buildInputs = [ imlib2 libX11 libXft libXinerama gnumake acpi ];
+  buildInputs = [imlib2 libX11 libXft libXinerama gnumake acpi];
 
   # see https://nixos.org/nixpkgs/manual/#ssec-install-phase
   # $src is defined as the location of our `src` attribute above
@@ -44,7 +42,7 @@ pkgs.stdenv.mkDerivation {
 
     # ln -s bin/dwm /usr/local/bin/dwm
     # install -D $src $out/bin/dwm
-    
+
     # cd $out
     # make install
   '';

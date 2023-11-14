@@ -1,7 +1,7 @@
 { lib, stdenv, pkgs, src }:
 
 let
-  config = ./custom;
+  config = ./config;
 in
 stdenv.mkDerivation {
   pname = "nvchad";
@@ -16,13 +16,15 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir $out
-    cp -r $src "$out/"
-    cp -r $src/init.lua $out/
-    mkdir -p "$out/lua"
-    cp -r $src/lua/core $out/lua/
-    cp -r $src/lua/plugins $out/lua/
-    cp -r ${config} "$out/lua/custom"
-  	# chmod -R +w $out/lua/custom
+    cp -rv $src/* $out/
+    cp -r ${config} "$out/lua/"
+    #  cp -r $src "$out/"
+    #  cp -r $src/init.lua $out/
+    #  mkdir -p "$out/lua"
+    #  cp -r $src/lua/core $out/lua/
+    #  cp -r $src/lua/plugins $out/lua/
+    #  cp -r ${config} "$out/lua/custom"
+  	# # chmod -R +w $out/lua/custom
   '';
 
   meta = with lib; {
