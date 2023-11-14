@@ -24,6 +24,7 @@ lib.recursiveUpdate3
   ./docker
   ./dunst
   ./dwm
+  ./emacs
   ./firefox
   ./git
   ./github
