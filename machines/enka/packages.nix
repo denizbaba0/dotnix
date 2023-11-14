@@ -28,6 +28,7 @@
   simplescreenrecorder # Screen Recorder
   telegram-desktop     # Telegram Client
   gimp                 # Image Editor
+  whatsapp-for-linux   # WhatsApp
 
   obs-studio
 

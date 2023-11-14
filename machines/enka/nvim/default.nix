@@ -2,7 +2,7 @@
 
 (homeConfiguration "nixos" {
   home = {
-    # file.".config/nvim".source = pkgs.callPackage (import ./vimacs.nix) {};
+    file.".config/nvim".source = pkgs.callPackage (import ./config) {};
     # activation.installNvimConfig = ''
     #   if [ ! -d "~/.config/nvim/" ]; 
     #   then
@@ -13,6 +13,7 @@
   };
 
   programs.neovim = enabled {
+    # package = pkgs.callPackage (import ./vimacs.nix) {};
     ## alias vim=nvim
     vimAlias = true;
     viAlias  = true;
