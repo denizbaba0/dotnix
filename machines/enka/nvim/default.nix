@@ -64,4 +64,8 @@
 
   # # ZIG
   # zls
+
+  # Shell
+  shellcheck
+  shfmt
 ])
