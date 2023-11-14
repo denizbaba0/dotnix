@@ -2,7 +2,11 @@
 # (with pkgs; systemPackages [
 #   picom
 # ])
-{pkgs, enabled, ...}: {
+{
+  pkgs,
+  enabled,
+  ...
+}: {
   services.picom = enabled {
     package = pkgs.picom.overrideAttrs (_o: {
       src = pkgs.fetchFromGitHub {
@@ -14,18 +18,22 @@
     });
     activeOpacity = 1;
     settings = {
-      "animation-clamping" = true;
-      "animation-dampening" = 25.0;
-      "animation-for-menu-window" = "slide-down";
-      "animation-for-open-window" = "zoom";
-      "animation-for-transient-window" = "slide-down";
-      "animation-for-unmap-window" = "zoom";
-      "animation-for-workspace-switch-in" = "slide-down";
-      "animation-for-workspace-switch-out" = "slide-up";
-      "animation-mass" = 0.7;
-      "animation-stiffness" = 175.0;
       "animations" = true;
-      "corner-radius" = 10;
+      "animation-stiffness" = 300;
+      "animation-dampening" = 50;
+      "animation-clamping" = true;
+      "animation-for-open-window" = "zoom"; # Open
+      "animation-for-unmap-window" = "zoom"; # Minimize
+      "animation-for-menu-window" = "zoom";
+      "animation-for-transient-window" = "zoom"; # popups
+
+      "animation-for-workspace-switch-in" = "zoom"; # workspace in move
+      "animation-for-workspace-switch-out" = "zoom"; # workspace out move
+
+      "vsync" = true;
+      "backend" = "glx";
+      # "animation-mass" = 0.7;
+      # "corner-radius" = 10; # rounded corners
       "inactive-dim" = 5.0e-2;
     };
 
