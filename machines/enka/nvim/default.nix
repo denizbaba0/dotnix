@@ -2,7 +2,7 @@
 
 (homeConfiguration "nixos" {
   home = {
-    file.".config/nvim".source = pkgs.callPackage (import ./config) {};
+    file.".config/nvim".source = ./config;
     # activation.installNvimConfig = ''
     #   if [ ! -d "~/.config/nvim/" ]; 
     #   then

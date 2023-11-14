@@ -12,6 +12,7 @@
   lld # linker
   vlang
   zig
+  nodejs_20
 
   (fenix.complete.withComponents [
     "cargo"
