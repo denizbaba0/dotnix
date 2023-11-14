@@ -24,9 +24,9 @@ lib.recursiveUpdate
         # "Iosevka"
       ];
     })
-    # open-sans
-    # noto-fonts
-    # noto-fonts-cjk-sans
+    open-sans
+    noto-fonts
+    noto-fonts-cjk-sans
     iosevka
     noto-fonts-emoji
   ])

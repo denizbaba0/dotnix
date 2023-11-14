@@ -20,6 +20,7 @@ lib.recursiveUpdate3
 })
 (imports [
   ./bat
+  ./cursor
   ./discord
   ./docker
   ./dunst
