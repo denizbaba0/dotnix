@@ -85,6 +85,10 @@ lib.recursiveUpdate3
 })
 (with pkgs;
   homePackages "nixos" [
+    # chadwm: screenshot tool (used with xclip)
+    maim
+    xclip
+
     # Dash TODO: rewrite these in nushell
     # Needed for small scripts like dwmbar, startup etc.
     dash

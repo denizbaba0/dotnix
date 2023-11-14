@@ -1,7 +1,7 @@
 #!/bin/dash
 
- # FUTURE #
- # - MAILBOX
+# FUTURE #
+# - MAILBOX
 
 # ^c$var^ = fg color
 # ^b$var^ = bg color
@@ -18,6 +18,7 @@ cpu() {
 	printf "^c$white^ ^b$grey^  $cpu_val"
 }
 
+# TODO: Nixify
 pkg_updates() {
 	#updates=$({ timeout 20 doas xbps-install -un 2>/dev/null || true; } | wc -l) # void
 	updates=$({ timeout 20 checkupdates 2>/dev/null || true; } | wc -l) # arch
@@ -25,7 +26,7 @@ pkg_updates() {
 	if [ -z "$updates" ]; then
 		printf "  ^c$green_dark^    Fully Updated"
 	else
-    printf "  ^c$green_dark^    $updates"" updates"
+		printf "  ^c$green_dark^    $updates"" updates"
 	fi
 }
 
@@ -46,12 +47,12 @@ mem() {
 }
 
 wlan() {
-  # WIFI:
-  # cat /sys/class/net/wl*/operstate 2>/dev/null
-  # ETH:
-  # cat /sys/class/net/enp4s0/operstate 2>/dev/null
+	# WIFI:
+	# cat /sys/class/net/wl*/operstate 2>/dev/null
+	# ETH:
+	# cat /sys/class/net/enp4s0/operstate 2>/dev/null
 	case "$(cat /sys/class/net/enp4s0/operstate 2>/dev/null)" in
-	up)   printf "^c$grey^ ^b$orange^ 󰤨 ^d^%s" "^b$grey^ ^c$orange^ Connected" ;;
+	up) printf "^c$grey^ ^b$orange^ 󰤨 ^d^%s" "^b$grey^ ^c$orange^ Connected" ;;
 	down) printf "^c$grey^ ^b$orange^ 󰤭 ^d^%s" "^b$grey^ ^c$orange^ Disconnected" ;;
 	esac
 }
@@ -71,7 +72,7 @@ weather() {
 	# moon=$(curl -s wttr.in/?format=%m)
 	# printf "^c$black^ ^b$white^ $moon"
 	# printf "^c$white^ ^b$grey^  $weather"
-  disk_space=$(df -h | rg '/dev/sdb3' | awk '{print $4}')
+	disk_space=$(df -h | rg '/dev/sda2' | awk '{print $4}') ## WARNING: SYSPECIFIG
 	disk_icon=''
 	printf "^c$black^ ^b$white^ $disk_icon"
 	printf "^c$white^ ^b$grey^  $disk_space"
@@ -101,7 +102,7 @@ recorder() {
 
 uptime_info() {
 	printf "^c$black^ ^b$red^ "
-  uptime_result=$(uptime | awk -F'[ ,:]+' '{printf "%02d:%02d\n", $6, $7}')
+	uptime_result=$(uptime | awk -F'[ ,:]+' '{printf "%02d:%02d\n", $6, $7}')
 	printf "^c$white^ ^b$grey^  $uptime_result"
 }
 
@@ -110,5 +111,5 @@ while true; do
 	interval=$((interval + 1))
 
 	# Add  $(battery),  $(brightness) below to see battery usage and brightness on the bar
-  sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(weather) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo) $(recorder)"
+	sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(weather) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo) $(recorder)"
 done
