@@ -37,7 +37,7 @@ lib.recursiveUpdate3
 
         displayManager = {
           gdm = enabled {};
-          defaultSession = "none+chadwm"; # nodesktopenv + wm ("none+i3")
+          defaultSession = "none+dwm"; # nodesktopenv + wm ("none+i3")
           session = [
             # https://mynixos.com/nixpkgs/option/services.xserver.displayManager.session
             {
@@ -49,7 +49,12 @@ lib.recursiveUpdate3
                 # xbacklight -set 10 & # TODO: not working (idk if essential)
                 xset r rate 200 50 &
                 ~/.config/chadwm/scripts/bar.sh &
-                "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
+                # "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
+                # draw our wallpaper only if xinit is not set
+                if [ ! -f $XDG_CONFIG_HOME/sxmo/xinit ]; then
+                  ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper}
+                fi
+
                 # picom
 
                 # NOTE: picom autostarts in the way It's declared in `default.nix`

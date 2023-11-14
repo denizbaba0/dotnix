@@ -5,9 +5,7 @@
   homeConfiguration,
   enabled,
   ...
-}:
-lib.recursiveUpdate
-(homeConfiguration "nixos" {
+}: (homeConfiguration "nixos" {
   programs.nushell.environmentVariables = {
     MANPAGER = ''"bat --plain --language man"'';
     PAGER = ''"bat --plain"'';
