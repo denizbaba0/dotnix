@@ -67,12 +67,12 @@ timeinfo() {
 	printf "^c$grey^^b$green^  $(date '+%R')"
 }
 
-weather() {
+disk() {
 	# weather=$(curl -s wttr.in/?format="%t\n")
 	# moon=$(curl -s wttr.in/?format=%m)
 	# printf "^c$black^ ^b$white^ $moon"
 	# printf "^c$white^ ^b$grey^  $weather"
-	disk_space=$(df -h | rg '/dev/sda2' | awk '{print $4}') ## WARNING: SYSPECIFIG
+	disk_space=$(df -t ext4 -h | rg '/dev' | awk '{print $4}') ## WARNING: SYSPECIFIG (assumes your file system is ext4 [e.g if It's btrfs, this section will be empty])
 	disk_icon=''
 	printf "^c$black^ ^b$white^ $disk_icon"
 	printf "^c$white^ ^b$grey^  $disk_space"
@@ -95,7 +95,7 @@ arch() {
 }
 
 recorder() {
-	printf "^c$red^ ^b$black^ "
+	printf "^c$red^ ^b$black^ "
 }
 
 # uptime | awk -F'[ ,:]+' '{printf "UP: %02d:%02d\n", $6, $7}'
@@ -111,5 +111,5 @@ while true; do
 	interval=$((interval + 1))
 
 	# Add  $(battery),  $(brightness) below to see battery usage and brightness on the bar
-	sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(weather) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo) $(recorder)"
+	sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(disk) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo) $(recorder)"
 done

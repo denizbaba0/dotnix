@@ -66,7 +66,7 @@ lib.recursiveUpdate3
 
                 # NOTE: picom autostarts in the way It's declared in `default.nix`
 
-                # while type dwm >/dev/null; do dwm && continue || break; done
+                while type dwm >/dev/null; do dwm && continue || break; done
               '';
             }
           ];

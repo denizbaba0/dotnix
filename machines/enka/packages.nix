@@ -30,6 +30,7 @@
   telegram-desktop     # Telegram Client
   gimp                 # Image Editor
   whatsapp-for-linux   # WhatsApp
+  mpv                  # Video Player
 
   obs-studio
 
