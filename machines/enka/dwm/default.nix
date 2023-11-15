@@ -45,7 +45,7 @@ lib.recursiveUpdate3
 
         displayManager = {
           gdm = enabled {};
-          defaultSession = "none+dwm"; # nodesktopenv + wm ("none+i3")
+          defaultSession = "none+chadwm"; # nodesktopenv + wm ("none+i3")
           session = [
             # https://mynixos.com/nixpkgs/option/services.xserver.displayManager.session
             {
@@ -64,10 +64,9 @@ lib.recursiveUpdate3
                 fi
                 ${xrandrsnip}
 
-                # picom
                 # NOTE: picom autostarts in the way It's declared in `default.nix`
 
-                while type dwm >/dev/null; do dwm && continue || break; done
+                # while type dwm >/dev/null; do dwm && continue || break; done
               '';
             }
           ];
@@ -87,7 +86,7 @@ lib.recursiveUpdate3
   homePackages "nixos" [
     # chadwm: screenshot tool (used with xclip)
     maim
-    xclip
+    xclip # also mentioned in nvim config
 
     # Dash TODO: rewrite these in nushell
     # Needed for small scripts like dwmbar, startup etc.
