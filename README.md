@@ -1,5 +1,8 @@
 # _**`.NIX > *NIX`**_
 
+![chadwm-2](https://github.com/utfeight/dotnix/assets/101834410/9d009cb7-2bbf-4f19-bf3b-8f3245387f19)
+
+
 NixOS is beyond a Linux distribution. Here is mine.
 
 ## Building
