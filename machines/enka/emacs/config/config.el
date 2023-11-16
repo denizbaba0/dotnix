@@ -101,7 +101,7 @@
   (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)
   (set-face-attribute 'org-superstar-leading nil :height 1.3))
 ;; Set different bullets, with one getting a terminal fallback.
-(setq org-superstar-headline-bullets-list '("▶" "λ" "§" "Σ" "Ψ" "Ω" "β" "δ" "ᗧ" "᠉" "⋑" "✸"))
+(setq org-superstar-headline-bullets-list '("λ" "§" "Σ" "Ψ" "Ω" "▶" "β" "δ" "᠉" "⋑" "✸"))
 ;; Stop cycling bullets to emphasize hierarchy of headlines.
 ;; (setq org-superstar-cycle-headline-bullets nil)
 ;; Hide away leading stars on terminal.

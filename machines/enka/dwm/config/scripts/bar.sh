@@ -64,7 +64,7 @@ dateinfo() {
 
 timeinfo() {
 	printf "^c$grey^ ^b$green_dark^ 󱑆 "
-	printf "^c$grey^^b$green^  $(date '+%R')"
+	printf "^c$grey^^b$green^  $(date '+%R')  "
 }
 
 disk() {
