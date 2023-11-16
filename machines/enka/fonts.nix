@@ -21,12 +21,13 @@ lib.recursiveUpdate
       # Nerd Fonts to install
       fonts = [
         "JetBrainsMono"
-        # "Iosevka"
+        "Iosevka"
       ];
     })
     open-sans
     noto-fonts
     noto-fonts-cjk-sans
+    jetbrains-mono
     iosevka
     noto-fonts-emoji
   ])

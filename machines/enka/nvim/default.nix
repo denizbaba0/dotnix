@@ -1,11 +1,31 @@
-{ config, home, lib, pkgs, homeConfiguration, homePackages, enabled, ... }: lib.recursiveUpdate
+# NOTE found from reddit:
+# You can pass the path to lib.mkOutOfStoreSymlink. If you're using flakes, make sure to pass an absolute path string.
+{
+  config,
+  home,
+  lib,
+  pkgs,
+  homeConfiguration,
+  homePackages,
+  enabled,
+  ...
+}:
+lib.recursiveUpdate3
 
+{
+  environment.systemPackages = with pkgs; [
+    (neovim.overrideAttrs (oldAttrs: {
+      src = builtins.fetchTarball {
+        url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
+      };
+    }))
+  ];
+}
 (homeConfiguration "nixos" {
   home = {
-    # file.".config/nvim".source = ./config;
-    file.".config/nvim".source = ./config;
+    # file.".config/nvim".source = ./config; # NOTE: migrated to manual git clone
     # activation.installNvimConfig = ''
-    #   if [ ! -d "~/.config/nvim/" ]; 
+    #   if [ ! -d "~/.config/nvim/" ];
     #   then
     #     ln -s "~/.config/nixos/machines/enka/nvim/custom" "~/.config/nvim/lua/"
     #   	chmod -R +w "~/.config/nvim/lua/custom"
@@ -17,55 +37,55 @@
     # package = pkgs.callPackage (import ./vimacs.nix) {};
     ## alias vim=nvim
     vimAlias = true;
-    viAlias  = true;
+    viAlias = true;
     # extraLuaConfig = lib.fileContents ./config/init.lua;
     defaultEditor = true;
   };
 })
+(with pkgs;
+  homePackages "nixos" [
+    # Clipboard Manager for X
+    xclip
 
-(with pkgs; homePackages "nixos" [
-  # Clipboard Manager for X
-  xclip
+    # # Fancy Neovide Nvim Client
+    # neovide
 
-  # # Fancy Neovide Nvim Client
-  # neovide
+    # General
+    codespell
 
-  # General
-  codespell
+    # CMAKE
+    cmake-language-server
 
-  # CMAKE
-  cmake-language-server
+    # # GO
+    # gopls
 
-  # # GO
-  # gopls
+    # # KOTLIN
+    # kotlin-language-server
 
-  # # KOTLIN
-  # kotlin-language-server
+    # # LATEX
+    # texlab
 
-  # # LATEX
-  # texlab
+    # LUA
+    stylua
 
-  # LUA
-  stylua
+    # MARKDOWN
+    marksman
+    proselint
+    deno # for marksman fmt
 
-  # MARKDOWN
-  marksman
-  proselint
-  deno      # for marksman fmt
+    # NIX
+    nil # LSP
+    deadnix # linter
+    statix # linter
+    alejandra # formatter (written in rust)
 
-  # NIX
-  nil       # LSP
-  deadnix   # linter
-  statix    # linter
-  alejandra # formatter (written in rust)
+    # RUST
+    rust-analyzer
 
-  # RUST
-  rust-analyzer
+    # # ZIG
+    # zls
 
-  # # ZIG
-  # zls
-
-  # Shell
-  shellcheck
-  shfmt
-])
+    # Shell
+    shellcheck
+    shfmt
+  ])

@@ -1,5 +1,5 @@
 { homeConfiguration, enabled, ... }:
 
 homeConfiguration "nixos" {
-  programs.librewolf = enabled {};
+  programs.firefox = enabled {};
 }
