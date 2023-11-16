@@ -94,10 +94,6 @@ arch() {
 	printf "^c$blue^"
 }
 
-recorder() {
-	printf "^c$red^ ^b$black^ "
-}
-
 # uptime | awk -F'[ ,:]+' '{printf "UP: %02d:%02d\n", $6, $7}'
 
 uptime_info() {
@@ -111,5 +107,5 @@ while true; do
 	interval=$((interval + 1))
 
 	# Add  $(battery),  $(brightness) below to see battery usage and brightness on the bar
-	sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(disk) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo) $(recorder)"
+	sleep 1 && xsetroot -name "$updates    $(firefox) $(emacs) $(arch) $(vim)    $(disk) $(wlan) $(uptime_info) $(cpu) $(mem) $(dateinfo) $(timeinfo)"
 done
