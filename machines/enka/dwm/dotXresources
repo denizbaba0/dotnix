@@ -4,6 +4,7 @@ Xft.autohint:	0
 Xft.hintstyle:	hintslight
 Xft.rgba:	rgb
 Xft.lcdfilter:	lcddefault
+Xcursor.theme: Vanilla-DMZ
 
 ! window padding
 st.borderpx: 20

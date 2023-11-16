@@ -2,7 +2,6 @@
 
 ![chadwm-2](https://github.com/utfeight/dotnix/assets/101834410/9d009cb7-2bbf-4f19-bf3b-8f3245387f19)
 
-
 NixOS is beyond a Linux distribution. Here is mine.
 
 ## Building
@@ -50,12 +49,31 @@ This outputs:
 Usage: ./rebuild.sh [-h | --help] [machine-name]
 ```
 
+### NOTES
+
+#### Mounting
+
+https://discourse.nixos.org/t/how-to-add-second-hard-drive-hdd/6132/3
+
+has a good explanation on how to mount a second hard drive. just:
+
+```sh
+sudo mkdir <DIR TO MOUNT THE DRIVE>
+sudo mount /dev/sda1 <DIR TO MOUNT THE DRIVE>
+sudo nixos-generate-config # this will write the currently mounted drives to /etc/nix/hardware-configuration.nix
+./rebuild.sh # apply the changes
+```
+
+and whollah! You have a second drive mounted automatically in every startup.
+
 ## License
 
 ```
 MIT License
 
-Copyright (c) 2023-present RGBCube
+dotnix - personal nixos configuration
+
+Copyright (c) 2023-present utfeight
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

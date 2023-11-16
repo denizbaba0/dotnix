@@ -45,6 +45,7 @@ lib.recursiveUpdate3
 
   ./fonts.nix
   ./localisation.nix
+  ./mount.nix
   ./packages.nix
   ./users.nix
 
