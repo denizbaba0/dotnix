@@ -12,10 +12,11 @@
       size    = 10;
     };
 
-    iconTheme = {
-      name    = "Gruvbox-Dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
-    };
+# TODO: set 
+    # iconTheme = {
+    #   name    = "Gruvbox-Dark";
+    #   package = pkgs.gruvbox-dark-icons-gtk;
+    # };
 
     theme = {
       name    = "Gruvbox-Dark-BL";

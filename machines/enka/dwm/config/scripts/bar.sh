@@ -72,7 +72,7 @@ disk() {
 	# moon=$(curl -s wttr.in/?format=%m)
 	# printf "^c$black^ ^b$white^ $moon"
 	# printf "^c$white^ ^b$grey^  $weather"
-	disk_space=$(df -t ext4 -h | rg '/dev' | awk '{print $4}') ## WARNING: SYSPECIFIG (assumes your file system is ext4 [e.g if It's btrfs, this section will be empty])
+	disk_space=$(df -h / | awk '{print $4}' | tail -n 1 | sed 's/G/GB/')
 	disk_icon=''
 	printf "^c$black^ ^b$white^ $disk_icon"
 	printf "^c$white^ ^b$grey^  $disk_space"

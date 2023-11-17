@@ -31,11 +31,17 @@ lib.recursiveUpdate
     # package = pkgs.emacs29-pgtk;
   };
 })
-(
-  with pkgs;
-    systemPackages [
-      # emacsPackages.vterm
-      # #(pkgs.emacs.override {withGTK3 = false; nativeComp = true;})
-      # emacsPackages.adwaita-dark-theme
-    ]
-)
+(with pkgs;
+  homePackages "nixos" [
+    # texlive.combined.scheme-tetex # for org-mode export, (e.g pdflatex"")
+    # pandoc # for org-mode export
+    # graphviz
+  ])
+# (
+#   with pkgs;
+#     systemPackages [
+#       # emacsPackages.vterm
+#       # #(pkgs.emacs.override {withGTK3 = false; nativeComp = true;})
+#       # emacsPackages.adwaita-dark-theme
+#     ]
+# )

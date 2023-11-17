@@ -20,7 +20,6 @@ lib.recursiveUpdate3
 })
 (imports [
   ./bat
-  ./cursor
   ./discord
   ./docker
   ./dunst
@@ -34,14 +33,15 @@ lib.recursiveUpdate3
   ./helix
   ./kitty
   ./networkmanager
-  ./nvim
   ./nushell
+  ./nvim
   ./picom
   ./pipewire
   ./python
   ./rofi
-  ./st
   ./sioyek
+  ./st
+  ./theme
 
   ./fonts.nix
   ./localisation.nix
