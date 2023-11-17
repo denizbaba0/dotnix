@@ -15,7 +15,9 @@ Here is the script you need to run to get this working:
   `dwm/default.nix - services.xserver.xrandrHeads` if you have a different
   setup.
 
-> [!IMPORTANT] You **WILL NEED** `/etc/nixos/hardware-configuration.nix`, as
+<!--deno-fmt-ignore-->
+> [!IMPORTANT]
+> You **WILL NEED** `/etc/nixos/hardware-configuration.nix`, as
 > this configuration imports it, so you will need to run
 > `sudo nixos-generate-config` if you've deleted them.
 
@@ -60,11 +62,22 @@ has a good explanation on how to mount a second hard drive. just:
 ```sh
 sudo mkdir <DIR TO MOUNT THE DRIVE>
 sudo mount /dev/sda1 <DIR TO MOUNT THE DRIVE>
-sudo nixos-generate-config # this will write the currently mounted drives to /etc/nix/hardware-configuration.nix
+sudo nixos-generate-config # this will write the currently mounted drives to /etc/nix/hardware-configuration.nix automatically
 ./rebuild.sh # apply the changes
 ```
 
-and whollah! You have a second drive mounted automatically in every startup.
+nix will automatically mount the drive on boot.
+
+#### Changing Cursor Theme
+
+this configuration ships with `lxappearance` out of the box. So you can just
+install you preferred cursor theme (from
+`machines/<machine-name>/cursor/default.nix`) and run `lxappearance` to change
+the cursor theme.
+
+<!--deno-fmt-ignore-->
+> [!NOTE]
+> same goes for cursor theme
 
 ## License
 
