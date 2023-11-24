@@ -8,19 +8,10 @@
   homeConfiguration,
   homePackages,
   enabled,
+  systemConfiguration,
   ...
 }:
 lib.recursiveUpdate3
-
-{
-  environment.systemPackages = with pkgs; [
-    (neovim.overrideAttrs (oldAttrs: {
-      src = builtins.fetchTarball {
-        url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-      };
-    }))
-  ];
-}
 (homeConfiguration "nixos" {
   home = {
     # file.".config/nvim".source = ./config; # NOTE: migrated to manual git clone
@@ -35,13 +26,22 @@ lib.recursiveUpdate3
 
   programs.neovim = enabled {
     # package = pkgs.callPackage (import ./vimacs.nix) {};
+    package = pkgs.neovim-nightly;
     ## alias vim=nvim
     vimAlias = true;
     viAlias = true;
     # extraLuaConfig = lib.fileContents ./config/init.lua;
-    defaultEditor = true;
+    # defaultEditor = true; # FIX: Didn't work for some reason <24-11-23>
   };
 })
+(
+  systemConfiguration {
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  }
+)
 (with pkgs;
   homePackages "nixos" [
     # Clipboard Manager for X
@@ -88,4 +88,10 @@ lib.recursiveUpdate3
     # Shell
     shellcheck
     shfmt
+
+    # Python
+    ruff
+
+    # GitCommit
+    gitlint
   ])

@@ -28,10 +28,13 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = {
     fenix,
+    neovim-nightly-overlay,
     home-manager,
     nixpkgs,
     ...
@@ -67,6 +70,7 @@
 
             overlays = [
               fenix.overlays.default
+              neovim-nightly-overlay.overlay
             ];
           };
 

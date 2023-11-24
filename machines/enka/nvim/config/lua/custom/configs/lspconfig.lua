@@ -10,7 +10,7 @@ local servers = {
   "clangd",        -- C/C++
   "rust_analyzer", -- Rust
   "cmake",         -- CMake
-  "nil_ls",           -- Nix
+  "nil_ls",        -- Nix
 }
 -- stylua: ignore end
 --                                    ^^^^^^^^^^^^^^^^-- TODO: Set up with rust-tools.nvim
@@ -21,3 +21,4 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- check out: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md for more info
