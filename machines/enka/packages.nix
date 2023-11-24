@@ -14,6 +14,7 @@ lib.recursiveUpdate
     tree     # tree view
     ps_mem   # memory usage
     gotop    # system monitor
+    unzip
 
     # Development Tools #
     clang_16
