@@ -33,7 +33,23 @@ lib.recursiveUpdate
 })
 (with pkgs;
   homePackages "nixos" [
-    # texlive.combined.scheme-tetex # for org-mode export, (e.g pdflatex"")
+    # org-mode export to pdf
+    (texlive.combine {
+      inherit
+        (texlive)
+        scheme-basic
+        dvisvgm
+        dvipng # for preview and export as html
+        wrapfig
+        amsmath
+        ulem
+        hyperref
+        capt-of
+        ;
+    })
+    # FIX: although It didn't fix the issue of misrendered icons in doom <17-11-23, utfeight utfeightt@gmail.com>
+    emacs-all-the-icons-fonts # doom fonts for various icons
+    # texlive.combined.scheme-medium # for org-mode export, (e.g pdflatex"")
     # pandoc # for org-mode export
     # graphviz
   ])

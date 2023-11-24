@@ -1,5 +1,12 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; NIXOS SPECIFIC WORKAROUND START
+
+(setq org-latex-compiler "lualatex")              ;; for nixpkgs texlive to work
+(setq org-preview-latex-default-process 'dvisvgm) ;; ^^^^^^^^^^^^^^^^^^^
+
+;; NIXOS SPECIFIC WORKAROUND END
+
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -7,7 +14,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "utfeight"
-      user-mail-address "benimadimarda123123@gmail.com")
+      user-mail-address "utfeightt@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -222,7 +229,7 @@
          ;; ("C-<tab>" . 'copilot-accept-completion-by-word)
 
          ;; change the suggestion:
-         ("C-<right>" . 'copilot-next-completion)
+         ("C-<right>" . 'copilot-next-completion) ;; WARNING: conflicts with the word movement mapping <17-11-23, utfeight utfeightt@gmail.com> 
          ("C-<left>" . 'copilot-previous-completion)
          :map copilot-completion-map
          ("<tab>" . 'copilot-accept-completion)
@@ -255,20 +262,20 @@
 ;; (setq emms-source-file-default-directory "~/Music/")
 ;; ------------------------------------------------------------
 
-;; --------------------------- All utf-8 ----------------------------
-;; I use my terminal pretty utf-8ified so I want emacs to be utf-8ified too
-(set-language-environment 'utf-8)
-(setq locale-coding-system 'utf-8)
-
-;; set the default encoding system
-(prefer-coding-system 'utf-8)
-(setq default-file-name-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-
-;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+;; ;; --------------------------- All utf-8 ----------------------------
+;; ;; I use my terminal pretty utf-8ified so I want emacs to be utf-8ified too
+;; (set-language-environment 'utf-8)
+;; (setq locale-coding-system 'utf-8)
+;;
+;; ;; set the default encoding system
+;; (prefer-coding-system 'utf-8)
+;; (setq default-file-name-coding-system 'utf-8)
+;; (set-default-coding-systems 'utf-8)
+;; (set-terminal-coding-system 'utf-8)
+;; (set-keyboard-coding-system 'utf-8)
+;;
+;; ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+;; (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 ;; ;; Setting up emms (Music player)
 ;; ;; (setq emms-volume-change-function 'emms-volume-alsa-control)
@@ -301,7 +308,7 @@
 
 ;; Setting up the font && weight
 ;; (setq doom-font (font-spec :family "Iosevka" :size 10.0 :weight 'Bold))
-(setq doom-font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'Medium))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 9.0 :weight 'Medium))
 
 ;; Bindings:
 
