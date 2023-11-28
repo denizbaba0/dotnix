@@ -8,6 +8,9 @@
 lib.recursiveUpdate
 (with pkgs;
   systemPackages [
+    # Libs #
+    libtool # for some cmake error (emacs/vterm module compilation)
+
     # Command Line Tools #
     neofetch # system info
     ripgrep  # grep search
@@ -19,6 +22,7 @@ lib.recursiveUpdate
     # Development Tools #
     clang_16
     clang-tools_16
+    cmake
     go
     jdk
     lld # linker
@@ -44,6 +48,8 @@ lib.recursiveUpdate
     gimp                      # Image Editor
     whatsapp-for-linux        # WhatsApp
     mpv                       # Video Player
+    inkscape                  # Vector Graphics Editor
+    kazam                     # ScreenShot
 
     obs-studio
 

@@ -32,6 +32,7 @@ lib.recursiveUpdate3
       ll = "ls --long";
       lla = "ls --long --all";
       sl = "ls";
+      doom = "~/.config/emacs/bin/doom";
     };
 
     environmentVariables = {

@@ -18,23 +18,23 @@
     });
     activeOpacity = 1;
     settings = {
-      "animations" = true;
-      "animation-stiffness" = 300;
-      "animation-dampening" = 50;
-      "animation-clamping" = true;
-      "animation-for-open-window" = "zoom"; # Open
-      "animation-for-unmap-window" = "zoom"; # Minimize
-      "animation-for-menu-window" = "zoom";
-      "animation-for-transient-window" = "zoom"; # popups
-
-      "animation-for-workspace-switch-in" = "zoom"; # workspace in move
-      "animation-for-workspace-switch-out" = "zoom"; # workspace out move
-
-      "vsync" = true;
-      "backend" = "glx";
-      # "animation-mass" = 0.7;
-      # "corner-radius" = 10; # rounded corners
-      "inactive-dim" = 5.0e-2;
+      # "animations" = true;
+      # "animation-stiffness" = 300;
+      # "animation-dampening" = 50;
+      # "animation-clamping" = true;
+      # "animation-for-open-window" = "zoom"; # Open
+      # "animation-for-unmap-window" = "zoom"; # Minimize
+      # "animation-for-menu-window" = "zoom";
+      # "animation-for-transient-window" = "zoom"; # popups
+      #
+      # "animation-for-workspace-switch-in" = "zoom"; # workspace in move
+      # "animation-for-workspace-switch-out" = "zoom"; # workspace out move
+      #
+      # "vsync" = true;
+      # "backend" = "glx";
+      # # "animation-mass" = 0.7;
+      # # "corner-radius" = 10; # rounded corners
+      # "inactive-dim" = 5.0e-2;
     };
 
     # extraArgs = ["--xrender-sync-fence"];
@@ -46,8 +46,8 @@
     fade = true;
     fadeDelta = 7;
 
-    shadow = true;
-    shadowOpacity = 0.8;
+    # shadow = true;
+    # shadowOpacity = 0.8;
 
     vSync = true;
   };

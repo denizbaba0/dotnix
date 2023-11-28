@@ -206,7 +206,8 @@
 ;;; (global-set-key (kbd "C-c C-c") 'neotree)
 
 (map! :leader
-      "z" #'neotree)
+      "z" #'treemacs
+      "hh" #'vterm)
 
 ;; autocompletion up speed
 
@@ -220,20 +221,20 @@
 ;;; (setq company-show-numbers t)
 
 ;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (
-         ;; accept one word completion: FIXME
-         ;; THESE ANNOYING BRUH!!!
-         ;; ("C-TAB" . 'copilot-accept-completion-by-word)
-         ;; ("C-<tab>" . 'copilot-accept-completion-by-word)
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (
+;;          ;; accept one word completion: FIXME
+;;          ;; THESE ANNOYING BRUH!!!
+;;          ;; ("C-TAB" . 'copilot-accept-completion-by-word)
+;;          ;; ("C-<tab>" . 'copilot-accept-completion-by-word)
 
-         ;; change the suggestion:
-         ("C-<right>" . 'copilot-next-completion) ;; WARNING: conflicts with the word movement mapping <17-11-23, utfeight utfeightt@gmail.com> 
-         ("C-<left>" . 'copilot-previous-completion)
-         :map copilot-completion-map
-         ("<tab>" . 'copilot-accept-completion)
-         ("TAB" . 'copilot-accept-completion)))
+;;          ;; change the suggestion:
+;;          ("C-<right>" . 'copilot-next-completion) ;; WARNING: conflicts with the word movement mapping <17-11-23, utfeight utfeightt@gmail.com>
+;;          ("C-<left>" . 'copilot-previous-completion)
+;;          :map copilot-completion-map
+;;          ("<tab>" . 'copilot-accept-completion)
+;;          ("TAB" . 'copilot-accept-completion)))
 
 ;; Set zsh as default shell with zsh function (:zsh)
 (defun zsh ()

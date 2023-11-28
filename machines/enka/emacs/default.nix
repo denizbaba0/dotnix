@@ -45,12 +45,15 @@ lib.recursiveUpdate
         ulem
         hyperref
         capt-of
+        beamer # for org-mode export to pdf
         ;
     })
     # FIX: although It didn't fix the issue of misrendered icons in doom <17-11-23, utfeight utfeightt@gmail.com>
     emacs-all-the-icons-fonts # doom fonts for various icons
     # texlive.combined.scheme-medium # for org-mode export, (e.g pdflatex"")
-    # pandoc # for org-mode export
+    pandoc # universal.
+    ispell # for flycheck
+    aspellDicts.tr # for ispell emacs
     # graphviz
   ])
 # (

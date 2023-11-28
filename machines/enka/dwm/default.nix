@@ -11,10 +11,12 @@
 lib.recursiveUpdate3
 (
   let
+    startup_copyq = true;
     wallpaper = "~/Pictures/wallpapers/stairs.jpg";
     xrandrsnip = ''
-      # xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary # NOTE: this line is commented out
-      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal # recent change
+      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary &
+      # NOTE: this line is commented out
+      # xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal &
     '';
   in
     systemConfiguration {
@@ -25,11 +27,11 @@ lib.recursiveUpdate3
       };
 
       services.xserver = enabled {
-        xrandrHeads = [
-          # do `xrandr --query` to get the names of your screens
-          # "HDMI-0" # TODO: uncomment this
-          "VGA-1"
-        ];
+        # xrandrHeads = [ # NOTE: No effect
+        #   # do `xrandr --query` to get the names of your screens
+        #   # "HDMI-0" # TODO: uncomment this
+        #   "VGA-1"
+        # ];
         layout = "tr";
         videoDrivers = ["nvidiaLegacy390"]; # nvidia GT630
 
@@ -58,11 +60,12 @@ lib.recursiveUpdate3
                 # xbacklight -set 10 & # TODO: not working (idk if essential)
                 xset r rate 200 50 &
                 dash ~/.config/chadwm/scripts/bar.sh &
-                # "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
                 # draw our wallpaper only if xinit is not set
                 if [ ! -f $XDG_CONFIG_HOME/sxmo/xinit ]; then
-                  ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper}
+                  ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper} &
                 fi
+                eww daemon & # start eww daemon for faster widget startup
+                ${if startup_copyq then "copyq &" else ""}
                 ${xrandrsnip}
 
                 # NOTE: picom autostarts in the way It's declared in `default.nix`
@@ -88,6 +91,7 @@ lib.recursiveUpdate3
     # chadwm: screenshot tool (used with xclip)
     maim
     xclip # also mentioned in nvim config
+    copyq # clipboard manager
 
     # Dash TODO: rewrite these in nushell
     # Needed for small scripts like dwmbar, startup etc.

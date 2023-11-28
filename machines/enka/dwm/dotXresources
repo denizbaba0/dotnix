@@ -7,7 +7,7 @@ Xft.lcdfilter:	lcddefault
 Xcursor.theme: Vanilla-DMZ
 
 ! window padding
-st.borderpx: 20
+st.borderpx:  0
 
 !-- values between 0.1  - 1.0 --!
 
