@@ -18,6 +18,7 @@ lib.recursiveUpdate
     ps_mem   # memory usage
     gotop    # system monitor
     unzip
+    wakatime # time tracking
 
     # Development Tools #
     clang_16

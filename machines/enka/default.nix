@@ -31,6 +31,7 @@ lib.recursiveUpdate3
   ./github
   ./gtk
   ./helix
+  ./jetbrains
   ./kitty
   ./networkmanager
   ./nushell
@@ -42,6 +43,7 @@ lib.recursiveUpdate3
   ./sioyek
   ./st
   ./theme
+  ./vscode
 
   ./fonts.nix
   ./localisation.nix

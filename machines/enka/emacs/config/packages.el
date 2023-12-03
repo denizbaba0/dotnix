@@ -28,8 +28,8 @@
 ;; You can override the recipe of a built in package without having to specify
 ;; all the properties for `:recipe'. These will inherit the rest of its recipe
 ;; from Doom or MELPA/ELPA/Emacsmirror:
-                                ;(package! builtin-package :recipe (:nonrecursive t))
-                                ;(package! builtin-package-2 :recipe (:repo "myfork/package"))
+                                        ;(package! builtin-package :recipe (:nonrecursive t))
+                                        ;(package! builtin-package-2 :recipe (:repo "myfork/package"))
 
 ;; Specify a `:branch' to install a package from a particular branch or tag.
 ;; This is required for some packages whose default branch isn't 'master' (which
@@ -116,3 +116,6 @@
 ;;    :pre-build ("make")
 ;;    )
 ;;   )
+
+
+(package! wakatime-mode)

@@ -346,3 +346,6 @@
  "C-<right>" #'forward-word
  "C-<left>"  #'backward-word
  )
+
+
+(global-wakatime-mode) ;; Enable wakatime globally

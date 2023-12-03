@@ -13,8 +13,10 @@ lib.recursiveUpdate3
   environment.sessionVariables = rec {
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
+    CARGO_HOME = "$HOME/.cargo/bin";
     PATH = [
       "${XDG_BIN_HOME}"
+      "${CARGO_HOME}"
     ];
   };
 })
@@ -44,4 +46,5 @@ lib.recursiveUpdate3
 (with pkgs;
   homePackages "nixos" [
     carapace
+    fish
   ])

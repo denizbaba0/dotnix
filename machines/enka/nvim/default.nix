@@ -94,4 +94,7 @@ lib.recursiveUpdate3
 
     # GitCommit
     gitlint
+
+    # TOML
+    taplo
   ])
