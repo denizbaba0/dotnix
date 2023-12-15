@@ -25,7 +25,7 @@ in (
     jetbrains-toolbox # may crash due to outdated nixpkgs version
     clion
     rust-rover
-    linuxKernel.packages.linux_latest_libre.perf
+    linuxKernel.packages.linux_latest_libre.perf # perf tool
   ]
 ))
 # JetBrains products are not-compatiple smoothly with NixOS

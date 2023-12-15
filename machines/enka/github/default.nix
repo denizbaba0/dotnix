@@ -1,5 +1,7 @@
 { homeConfiguration, enabled, ... }:
 
 homeConfiguration "nixos" {
-  programs.gh = enabled {};
+  programs.gh = enabled {
+    gitCredentialHelper = enabled {};
+  };
 }

@@ -1,4 +1,4 @@
-{ homeConfiguration, enabled, ... }:
+{ homeConfiguration,pkgs, enabled, ... }:
 
 homeConfiguration "nixos" {
   programs.nushell.shellAliases = {
@@ -27,12 +27,6 @@ homeConfiguration "nixos" {
     extraConfig = {
       init.defaultBranch = "master";
       push.autoSetupRemote = true;
-
-      # commit.gpgSign  = true;
-      # gpg.format      = "ssh";
-      # user.signingKey = "~/.ssh/id_rsa";
-
-      # url."ssh://git@github.com/".insteadOf = "https://github.com/";
-    };
+    credential.helper = "libsecret";    };
   };
 }

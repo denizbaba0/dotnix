@@ -14,9 +14,9 @@ lib.recursiveUpdate3
     startup_copyq = true;
     wallpaper = "~/Pictures/wallpapers/stairs.jpg";
     xrandrsnip = ''
-      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary &
+      # xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary &
       # NOTE: this line is commented out
-      # xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal &
+      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal &
     '';
   in
     systemConfiguration {
