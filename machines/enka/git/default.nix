@@ -27,6 +27,9 @@ homeConfiguration "nixos" {
     extraConfig = {
       init.defaultBranch = "master";
       push.autoSetupRemote = true;
-    credential.helper = "libsecret";    };
+      credential.helper = "${
+        pkgs.git.override { withLibsecret = true; }
+      }/bin/git-credential-libsecret";
+   };
   };
 }

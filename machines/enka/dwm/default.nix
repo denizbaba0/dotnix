@@ -1,22 +1,29 @@
-{
-  lib,
-  pkgs,
-  theme,
-  systemConfiguration,
-  homeConfiguration,
-  homePackages,
-  enabled,
-  ...
-}:
-lib.recursiveUpdate3
+	{
+	  lib,
+	  pkgs,
+	  theme,
+	  systemConfiguration,
+	  homeConfiguration,
+	  homePackages,
+	  enabled,
+	  ...
+	}:
+	lib.recursiveUpdate3
 (
   let
     startup_copyq = true;
     wallpaper = "~/Pictures/wallpapers/stairs.jpg";
-    xrandrsnip = ''
-      # xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1920x1080 --rotate normal --primary &
-      # NOTE: this line is commented out
-      xrandr --output VGA-1 --mode 1024x768 --pos 0x0 --rotate normal &
+    xrandr = ''
+      xrandr --output VGA-1     \
+             --mode 1024x768    \
+             --pos 0x0          \
+             --rotate normal    \
+             --right-of HDMI-1  \
+                                \
+             --output HDMI-1    \
+             --mode 1920x1080   \
+             --rotate normal    \
+             --primary          \
     '';
   in
     systemConfiguration {
@@ -66,7 +73,7 @@ lib.recursiveUpdate3
                 fi
                 eww daemon & # start eww daemon for faster widget startup
                 ${if startup_copyq then "copyq &" else ""}
-                ${xrandrsnip}
+                ${xrandr}
 
                 # NOTE: picom autostarts in the way It's declared in `default.nix`
 

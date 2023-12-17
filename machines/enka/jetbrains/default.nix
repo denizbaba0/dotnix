@@ -5,7 +5,24 @@
   homePackages,
   enabled,
   ...
-}:
+}: lib.recursiveUpdate
+{
+  environment.systemPackages = with pkgs; [
+#      (jetbrains.clion.overrideAttrs (old: rec {
+#        src = fetchurl {
+#          url = "https://download.jetbrains.com/clion/CLion-233.11799.284.tar.gz";
+#          sha256 = "sha256-B1JMBE3kVly/BS+ZgARKpsbigGTu+zAzWHr6Hgn/ab8=";
+#        };
+#      }))
+
+      (jetbrains.rust-rover.overrideAttrs (old: rec {
+        src = fetchurl {
+          url = "https://download.jetbrains.com/rustrover/RustRover-233.11799.284.tar.gz";
+          sha256 = "sha256-B1JMBE3kVly/BS+ZgARKpsbigGTu+zAzWHr6Hgn/ab8=";
+        };
+      }))
+  ];
+}
 (let
   clion = pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [
     "github-copilot"
@@ -19,12 +36,12 @@
     "ideavim"
     "rust"
   ];
+
+
 in (
   with pkgs;
   homePackages "nixos" [
     jetbrains-toolbox # may crash due to outdated nixpkgs version
-    clion
-    rust-rover
     linuxKernel.packages.linux_latest_libre.perf # perf tool
   ]
 ))

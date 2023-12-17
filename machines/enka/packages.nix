@@ -30,6 +30,7 @@ lib.recursiveUpdate
     vlang
     zig
     nodejs_20
+    openssl
 
     (fenix.complete.withComponents [
       "cargo"
@@ -51,6 +52,7 @@ lib.recursiveUpdate
     mpv                       # Video Player
     inkscape                  # Vector Graphics Editor
     kazam                     # ScreenShot
+    vieb                      # Vim Browser
 
     obs-studio
 
