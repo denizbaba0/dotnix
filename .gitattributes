@@ -1,3 +1,0 @@
-# Ignore other related file extensions
-* linguist-vendored
-*.nix linguist-vendored=false

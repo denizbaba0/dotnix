@@ -1,143 +1,144 @@
 {
-  description = "My NixOS configuration.";
+  description = "All my NixOS configurations.";
 
   nixConfig = {
-    extra-experimental-features = ''
-      nix-command
-      flakes
-    '';
-
     extra-substituters = ''
       https://nix-community.cachix.org/
+      https://hyprland.cachix.org/
+      https://cache.privatevoid.net/
+      https://cache.garnix.io/
     '';
 
     extra-trusted-public-keys = ''
       nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+      hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=
+      cache.privatevoid.net-1:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg=
+      cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
     '';
   };
 
   inputs = {
+    nixSuper = {
+      url = "github:privatevoid-net/nix-super";
+    };
+
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+
+    homeManager = {
+      url                    = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
+
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+    };
+
+    ghostty = {
+      url = "git+ssh://git@github.com/RGBCube/GHostty";
+    };
+
+    ghosttyModule = {
+      url = "github:clo4/ghostty-hm-module";
+    };
+
+    nuScripts = {
+      url   = "github:nushell/nu_scripts";
+      flake = false;
+    };
+
     fenix = {
-      url = "github:nix-community/fenix";
+      url                    = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    zls = {
+      url                    = "github:zigtools/zls";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    tools = {
+      url                    = "github:RGBCube/FlakeTools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    themes = {
+      url = "github:RGBCube/ThemeNix";
+    };
   };
 
   outputs = {
-    fenix,
-    neovim-nightly-overlay,
-    home-manager,
+    nixSuper,
     nixpkgs,
+    homeManager,
+    ghosttyModule,
+    nuScripts,
+    fenix,
+    tools,
+    themes,
     ...
-  }: let
-    machines = [
-      ./machines/enka
-    ];
+  } @ inputs: let
+    lib = nixpkgs.lib;
 
-    architectures = [
-      "x86_64-linux"
-    ];
+    ulib = import ./lib lib;
 
-    nixosSystem = arguments: modules:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = arguments;
-        modules = modules;
+    configuration = host: system: let
+      pkgs = import nixpkgs { inherit system; };
+
+      upkgs = { inherit nuScripts; } // (lib.genAttrs
+        [ "nixSuper" "hyprland" "hyprpicker" "ghostty" "zls" ]
+        (name: inputs.${name}.packages.${system}.default));
+
+      theme = themes.custom (themes.raw.gruvbox-dark-hard // {
+        corner-radius = 8;
+        border-width  = 2;
+
+        margin  = 6;
+        padding = 8;
+
+        font.size.normal = 12;
+        font.size.big    = 18;
+
+        font.sans.name    = "Lexend";
+        font.sans.package = pkgs.lexend;
+
+        font.mono.name    = "JetBrainsMono Nerd Font";
+        font.mono.package = (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; });
+
+        icons.name    = "Gruvbox-Plus-Dark";
+        icons.package = pkgs.callPackage (import ./derivations/gruvbox-icons.nix) {};
+      });
+
+      defaultConfiguration = {
+        environment.defaultPackages = [];
+
+        home-manager.sharedModules   = [ ghosttyModule.homeModules.default ];
+        home-manager.useGlobalPkgs   = true;
+        home-manager.useUserPackages = true;
+
+        networking.hostName  = host;
+        nixpkgs.hostPlatform = system;
       };
+    in lib.nixosSystem {
+      inherit system;
 
-    importConfiguration = configurationDirectory: hostPlatform: let
-      hostName = builtins.baseNameOf configurationDirectory;
-    in {
-      nixosConfigurations.${hostName} =
-        nixosSystem {
-          lib =
-            nixpkgs.lib
-            // {
-              recursiveUpdate3 = x: y: z: nixpkgs.lib.recursiveUpdate x (nixpkgs.lib.recursiveUpdate y z);
-            };
-
-          pkgs = import nixpkgs {
-            system = hostPlatform;
-            config.allowUnfree = true;
-
-            overlays = [
-              fenix.overlays.default
-              neovim-nightly-overlay.overlay
-            ];
-          };
-
-          theme = import ./themes/gruvbox.nix;
-
-          # SYSTEM
-          systemConfiguration = attributes: attributes;
-
-          systemPackages = packages: {
-            environment.systemPackages = packages;
-          };
-
-          systemFonts = fonts: {
-            fonts.packages = fonts;
-          };
-
-          # HOME
-          homeConfiguration = userName: attributes: {
-            home-manager.users.${userName} = attributes;
-          };
-
-          homePackages = userName: packages: {
-            home-manager.users.${userName}.home.packages = packages;
-          };
-
-          # GENERAL
-          imports = importPaths: {
-            imports = importPaths;
-          };
-
-          enabled = attributes:
-            attributes
-            // {
-              enable = true;
-            };
-
-          normalUser = attributes:
-            attributes
-            // {
-              isNormalUser = true;
-            };
-        } [
-          configurationDirectory
-          home-manager.nixosModules.home-manager
-
-          {
-            nix.gc = {
-              automatic = true;
-              dates = "daily";
-              options = "--delete-older-than 1w";
-              persistent = true;
-            };
-
-            nix.settings.experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-
-            boot.tmp.cleanOnBoot = true;
-
-            networking.hostName = hostName;
-
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
+      specialArgs = { inherit inputs ulib upkgs theme; };
+      modules     = [
+        homeManager.nixosModules.default
+        defaultConfiguration
+        ./hosts/${host}
+      ];
     };
-  in
-    builtins.foldl' nixpkgs.lib.recursiveUpdate {} (builtins.concatMap (architecture: builtins.map (configuration: importConfiguration configuration architecture) machines) architectures);
+
+    configurations = builtins.mapAttrs configuration;
+  in {
+    nixosConfigurations = configurations {
+      enka = "x86_64-linux";
+    };
+  };
 }

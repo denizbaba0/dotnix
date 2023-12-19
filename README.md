@@ -1,92 +1,63 @@
-# _**`.NIX > *NIX`**_
+# My NixOS Configurations
 
-![chadwm-2](https://github.com/utfeight/dotnix/assets/101834410/9d009cb7-2bbf-4f19-bf3b-8f3245387f19)
+This repository contains my NixOS configurations for all my machines.
 
-NixOS is beyond a Linux distribution. Here is mine.
-
-## Building
+## Bootstrapping
 
 Here is the script you need to run to get this working:
 
-### Notes:
-
-- I use two monitors in my setup (1920x1080, and a 20" square one) So my
-  configuration assumes that you have two monitors. Just edit
-  `dwm/default.nix - services.xserver.xrandrHeads` if you have a different
-  setup.
-
-<!--deno-fmt-ignore-->
 > [!IMPORTANT]
-> You **WILL NEED** `/etc/nixos/hardware-configuration.nix`, as
-> this configuration imports it, so you will need to run
-> `sudo nixos-generate-config` if you've deleted them.
+> You will need to have an SSH key to authorize GitHub with,
+> and have access to the Ghostty GitHub repository as I
+> use Ghostty and Ghostty is in private beta at the moment.
 
 ```sh
-nix-shell -p git --command "git clone https://github.com/utfeight/dotnix && cd dotnix"
-./rebuild.sh
+sudo nix-shell --packages git nu nix-output-monitor --command "
+  git clone https://github.com/RGBCube/NixOSConfiguration ~/Configuration
+  cd ~/Configuration
+  nu rebuild.nu <host>
+"
 ```
 
-`machine-name` is a machine selected from the machines in the `machines`
-directory.
+`host` is a host selected from the hosts in the `hosts` directory.
 
-## Configuration
+## Applying Changes
 
-Lets say you have changed the configuration and want to apply the changes to
-your system. You would have to run the rebuild script:
+Lets say you have changed the configuration and want to apply the changes
+to your system. You would have to run the rebuild script:
 
 ```sh
-git add . # if you have added/removed new files
-./rebuild.sh
+./rebuild.nu
 ```
 
-This runs the script interactively. You can also check how the script is used:
+This runs the script interactively.
+
+You can also check how the script is used:
 
 ```sh
-./rebuild.sh --help
+./rebuild.nu --help
 ```
 
 This outputs:
 
 ```
-Usage: ./rebuild.sh [-h | --help] [machine-name]
+Usage:
+  > rebuild.nu (host) ...(arguments)
+
+Flags:
+  -h, --help - Display the help message for this command
+
+Parameters:
+  host <string>: The host to build. (optional, default: '')
+  ...arguments <any>: The arguments to pass to `nix system apply`.
 ```
-
-### NOTES
-
-#### Mounting
-
-https://discourse.nixos.org/t/how-to-add-second-hard-drive-hdd/6132/3
-
-has a good explanation on how to mount a second hard drive. just:
-
-```sh
-sudo mkdir <DIR TO MOUNT THE DRIVE>
-sudo mount /dev/sda1 <DIR TO MOUNT THE DRIVE>
-sudo nixos-generate-config # this will write the currently mounted drives to /etc/nix/hardware-configuration.nix automatically
-./rebuild.sh # apply the changes
-```
-
-nix will automatically mount the drive on boot.
-
-#### Changing Cursor Theme
-
-this configuration ships with `lxappearance` out of the box. So you can just
-install you preferred cursor theme (from
-`machines/<machine-name>/cursor/default.nix`) and run `lxappearance` to change
-the cursor theme.
-
-<!--deno-fmt-ignore-->
-> [!NOTE]
-> same goes for cursor theme
 
 ## License
 
 ```
 MIT License
 
-dotnix - personal nixos configuration
-
-Copyright (c) 2023-present utfeight
+Copyright (c) 2023-present RGBCube
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -105,4 +76,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 ```
