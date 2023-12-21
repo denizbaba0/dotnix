@@ -16,4 +16,7 @@
   noto-fonts-cjk-sans
   noto-fonts-lgc-plus
   noto-fonts-emoji
+
+  # Bitmap Fonts
+  tewi-font
 ]))

@@ -18,6 +18,11 @@
   };
 
   inputs = {
+
+    neovim = {
+      url = "github:utfeight/vimacs-flake";
+    };
+  
     nixSuper = {
       url = "github:privatevoid-net/nix-super";
     };
@@ -91,10 +96,10 @@
       pkgs = import nixpkgs { inherit system; };
 
       upkgs = { inherit nuScripts; } // (lib.genAttrs
-        [ "nixSuper" "hyprland" "hyprpicker" "ghostty" "zls" ]
+        [ "nixSuper" "hyprland" "hyprpicker" "ghostty" "zls" "neovim" ]
         (name: inputs.${name}.packages.${system}.default));
 
-      theme = themes.custom (themes.raw.gruvbox-dark-hard // {
+      theme = themes.custom (themes.raw.everforest-dark-hard // {
         corner-radius = 8;
         border-width  = 2;
 
@@ -104,8 +109,8 @@
         font.size.normal = 12;
         font.size.big    = 18;
 
-        font.sans.name    = "Lexend";
-        font.sans.package = pkgs.lexend;
+        font.sans.name    = "Iosevka";
+        font.sans.package = pkgs.iosevka;
 
         font.mono.name    = "JetBrainsMono Nerd Font";
         font.mono.package = (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; });

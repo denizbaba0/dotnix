@@ -32,6 +32,9 @@
 
       pstree = "pstree -g 2";
       tree = "tree -CF --dirsfirst";
+
+      fd = "rg --files";
+      # fgit = "rg --files --hidden | rg -e \"\\.(ignore|git)\""; 
     };
   };
 })

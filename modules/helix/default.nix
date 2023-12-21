@@ -1,108 +1,114 @@
-{ ulib, lib, pkgs, upkgs, ... }: with ulib; merge
+{
+  ulib,
+  lib,
+  pkgs,
+  upkgs,
+  ...
+}:
+with ulib;
+  merge
+  (homeConfiguration {
+    programs.nushell.environmentVariables.EDITOR = "hx";
+    programs.nushell.shellAliases.x = "hx";
 
-(homeConfiguration {
-  programs.nushell.environmentVariables.EDITOR = "hx";
-  programs.nushell.shellAliases.x              = "hx";
+    programs.helix = enabled {
+      languages.language = [
+        {
+          name = "nix";
 
-  programs.helix = enabled {
-    languages.language = [
-      {
-        name = "nix";
+          auto-format = false;
+          formatter.command = "alejandra";
+          formatter.args = ["-"];
 
-        auto-format       = false;
-        formatter.command = "alejandra";
-        formatter.args    = [ "-" ];
+          language-servers = ["nixd"];
+        }
+        {
+          name = "cull";
+          injection-regex = "cull";
+          scope = "scope.cull";
 
-        language-servers = [ "nixd" ];
-      }
-      {
-        name            = "cull";
-        injection-regex = "cull";
-        scope           = "scope.cull";
+          comment-token = "#";
+          indent.unit = "\t";
+          indent.tab-width = 4;
 
-        comment-token    = "#";
-        indent.unit      = "\t";
-        indent.tab-width = 4;
+          file-types = ["cull"];
+          roots = ["build.cull"];
 
-        file-types = [ "cull" ];
-        roots      = [ "build.cull" ];
+          grammar = "python";
+        }
+      ];
 
-        grammar = "python";
-      }
-    ];
+      languages.language-server.nixd.command = "nixd";
 
-    languages.language-server.nixd.command = "nixd";
+      settings.theme = "base16_transparent";
 
-    settings.theme = "base16_transparent";
+      settings.editor = {
+        color-modes = true;
+        completion-replace = true;
+        completion-trigger-len = 0;
+        cursor-shape.insert = "bar";
+        cursorline = true;
+        bufferline = "multiple";
+        file-picker.hidden = false;
+        idle-timeout = 300;
+        line-number = "relative";
+        shell = ["bash" "-c"];
+        text-width = 100;
+      };
 
-    settings.editor = {
-      color-modes            = true;
-      completion-replace     = true;
-      completion-trigger-len = 0;
-      cursor-shape.insert    = "bar";
-      cursorline             = true;
-      bufferline             = "multiple";
-      file-picker.hidden     = false;
-      idle-timeout           = 300;
-      line-number            = "relative";
-      shell                  = [ "bash" "-c" ];
-      text-width             = 100;
+      settings.editor.indent-guides = {
+        character = "▏";
+        render = true;
+      };
+
+      settings.editor.statusline.mode = {
+        insert = "INSERT";
+        normal = "NORMAL";
+        select = "SELECT";
+      };
+
+      settings.editor.whitespace = {
+        characters.tab = "→";
+        render.tab = "all";
+      };
+
+      settings.keys = lib.genAttrs ["normal" "select"] (name: {
+        D = "extend_to_line_end";
+      });
     };
+  })
+  (homePackages (with pkgs; [
+    # CMAKE
+    cmake-language-server
 
-    settings.editor.indent-guides = {
-      character = "▏";
-      render = true;
-    };
+    # GO
+    gopls
 
-    settings.editor.statusline.mode = {
-      insert = "INSERT";
-      normal = "NORMAL";
-      select = "SELECT";
-    };
+    # HTML
+    vscode-langservers-extracted
 
-    settings.editor.whitespace = {
-      characters.tab = "→";
-      render.tab     = "all";
-    };
+    # KOTLIN
+    kotlin-language-server
 
-    settings.keys = lib.genAttrs [ "normal" "select" ] (name: {
-      D = "extend_to_line_end";
-    });
-  };
-})
+    # LATEX
+    texlab
 
-(homePackages (with pkgs; [
-  # CMAKE
-  cmake-language-server
+    # LUA
+    lua-language-server
 
-  # GO
-  gopls
+    # MARKDOWN
+    marksman
 
-  # HTML
-  vscode-langservers-extracted
+    # NIX
+    alejandra
+    nixd
 
-  # KOTLIN
-  kotlin-language-server
+    # PYTHON
+    python311Packages.python-lsp-server
 
-  # LATEX
-  texlab
+    # RUST
+    rust-analyzer
 
-  # LUA
-  lua-language-server
-
-  # MARKDOWN
-  marksman
-
-  # NIX
-  alejandra
-  nixd
-
-  # PYTHON
-  python311Packages.python-lsp-server
-
-  # RUST
-  rust-analyzer
-
-  # ZIG
-  upkgs.zls
-]))
+    # ZIG
+    upkgs.zls
+  ]))

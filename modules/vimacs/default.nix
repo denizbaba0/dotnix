@@ -7,14 +7,11 @@
 }: with ulib; merge
 
 (homeConfiguration {
-#   programs.neovim = enabled {
-#     vimAlias = true;
-#     viAlias  = true;
-#   };
-  xdg.configFile."nvim" = {
-    source = ./config;
-    recursive = true;
-  };
+  #   programs.neovim = enabled {
+  #     vimAlias = true;
+  #     viAlias  = true;
+  #   };
+  xdg.configFile."nvim".source = ./config;
 })
   (homePackages (with pkgs; [
     upkgs.neovim

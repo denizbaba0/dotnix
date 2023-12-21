@@ -2,6 +2,5 @@
 
 graphicalConfiguration {
   programs.firefox = enabled {};
-
-  programs.librewolf = enabled {};
+  # programs.librewolf = enabled {};
 }

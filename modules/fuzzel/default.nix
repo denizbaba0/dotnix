@@ -17,6 +17,8 @@ graphicalConfiguration {
       horizontal-pad = padding;
       vertical-pad   = padding;
       inner-pad      = padding;
+
+      fuzzy = true;
     };
 
     settings.colors = {

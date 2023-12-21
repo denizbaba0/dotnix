@@ -1,10 +1,11 @@
 { ulib, ... }: with ulib; merge3
 
 (systemConfiguration {
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.05";
 
   users.users.nixos = graphicalUser {
-    description = "NixOS";
+    description = "Usable Hyprland rice. If you don't use nVidia like me";
     extraGroups = [ "wheel" ];
   };
 })
@@ -17,11 +18,12 @@
   ./hardware.nix
 
   "bat"
-  "blueman"
+  # "blueman"
   "boot"
   "btop"
-  "discord"
+  # "discord"
   "dunst"
+  # "emacs"
   "firefox"
   "fonts"
   "fuzzel"
@@ -30,14 +32,16 @@
   "gtk"
   "helix"
   "hyprland"
+  "jetbrains"
   "kitty"
   # "kmscon"
   "localisation"
   "logind"
-  "networkmanager"
+  # "networkmanager"
   "nix"
   "nushell"
-  "openttd"
+  "nvidia"
+  # "openttd"
   "packages"
   "pipewire"
   "pueue"
@@ -46,8 +50,10 @@
   "ripgrep"
   "rust"
   "ssh"
-  "steam"
+  # "steam"
   "steck"
   "sudo"
+  "vimacs"
+  "vscode"
   "waybar"
 ])

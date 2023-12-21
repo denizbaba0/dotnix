@@ -3,7 +3,6 @@
 (systemPackages (with pkgs; [
   asciinema
   fastfetch
-  fd
   hyperfine
   moreutils
   nix-index
@@ -30,13 +29,16 @@
 ]))
 
 (graphicalPackages (with pkgs; [
-  qbittorrent
-  thunderbird
-  whatsapp-for-linux
-  xfce.thunar
+  # qbittorrent
+  # thunderbird
+  # whatsapp-for-linux
+  xfce.thunar        # File Manager
+  vieb               # Vim Browser
+  # nvi                 # Text Editor
 
   krita
   obs-studio
+  # surf
 
   libreoffice
   hunspellDicts.en_US

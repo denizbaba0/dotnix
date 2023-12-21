@@ -52,6 +52,16 @@ Parameters:
   ...arguments <any>: The arguments to pass to `nix system apply`.
 ```
 
+## NOTES
+
+### Notable links:
+
+- video sharing on wayland: https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16
+
+### Notable Mentions:
+
+- Minimal rice: https://codeberg.org/rs221122/dotfiles/
+
 ## License
 
 ```
