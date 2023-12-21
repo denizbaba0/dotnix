@@ -4,18 +4,18 @@
   pkgs,
   upkgs,
   ...
-}: with ulib; merge
-
-(homeConfiguration {
-  #   programs.neovim = enabled {
-  #     vimAlias = true;
-  #     viAlias  = true;
-  #   };
-  xdg.configFile."nvim".source = ./config;
-})
+}:
+with ulib;
+  merge
+  (homeConfiguration {
+    # programs.neovim = enabled {
+    #   package = pkgs.neovim-unwrapped;
+    #   vimAlias = true;
+    #   viAlias  = true;
+    # };
+    xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
+  })
   (homePackages (with pkgs; [
-    upkgs.neovim
-
     # CMAKE
     cmake-language-server
 

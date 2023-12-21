@@ -4,8 +4,8 @@
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.05";
 
-  users.users.nixos = graphicalUser {
-    description = "camel_case's, daily driver";
+  users.users.SnakeCase = graphicalUser {
+    description = "Usable Hyprland rice. If you don't use nVidia like me";
     extraGroups = [ "wheel" ];
   };
 })
@@ -26,10 +26,12 @@
   # "emacs"
   "firefox"
   "fonts"
+  "fuzzel"
   "ghostty"
   "git"
   "gtk"
   "helix"
+  "hyprland"
   "jetbrains"
   "kitty"
   # "kmscon"
@@ -39,9 +41,10 @@
   "nix"
   "nushell"
   "nvidia"
+  # "openttd"
   "packages"
   "pipewire"
-  # "pueue"
+  "pueue"
   "python"
   "qt"
   "ripgrep"

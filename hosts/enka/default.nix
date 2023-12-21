@@ -5,7 +5,7 @@
   system.stateVersion = "23.05";
 
   users.users.nixos = graphicalUser {
-    description = "Usable Hyprland rice. If you don't use nVidia like me";
+    description = "DWM based daily driver";
     extraGroups = [ "wheel" ];
   };
 })
@@ -18,42 +18,40 @@
   ./hardware.nix
 
   "bat"
-  # "blueman"
+  "blueman"
   "boot"
   "btop"
-  # "discord"
+  "discord"
   "dunst"
-  # "emacs"
+  "dwm"
+  # "emacs" # BROKEN
   "firefox"
   "fonts"
-  "fuzzel"
-  "ghostty"
+  # "ghostty"
   "git"
   "gtk"
   "helix"
-  "hyprland"
   "jetbrains"
   "kitty"
-  # "kmscon"
+  "kmscon"
   "localisation"
   "logind"
-  # "networkmanager"
+  "networkmanager"
   "nix"
   "nushell"
   "nvidia"
-  # "openttd"
   "packages"
+  "picom"
   "pipewire"
   "pueue"
   "python"
   "qt"
   "ripgrep"
   "rust"
+  "sioyek"
   "ssh"
-  # "steam"
   "steck"
   "sudo"
   "vimacs"
   "vscode"
-  "waybar"
 ])

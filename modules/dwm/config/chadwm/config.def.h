@@ -45,7 +45,7 @@ static const char *fonts[]          = {
 }; //:size=10
 
 // theme
-#include "themes/gruvbox.h"
+#include "themes/nix.nix.h"
 
 static const char *colors[][3]      = {
     /*                     fg       bg      border */

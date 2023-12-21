@@ -2,7 +2,6 @@
   pkgs,
   lib,
   ulib,
-  enabled,
   ...
 }:
 with ulib;

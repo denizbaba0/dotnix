@@ -1,5 +1,5 @@
 {
-  description = "All my NixOS configurations.";
+  description = "My NixOS Configurations";
 
   nixConfig = {
     extra-substituters = ''
@@ -18,11 +18,6 @@
   };
 
   inputs = {
-
-    neovim = {
-      url = "github:utfeight/vimacs-flake";
-    };
-  
     nixSuper = {
       url = "github:privatevoid-net/nix-super";
     };
@@ -32,43 +27,27 @@
     };
 
     homeManager = {
-      url                    = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
-
-    hyprpicker = {
-      url = "github:hyprwm/hyprpicker";
-    };
-
-    ghostty = {
-      url = "git+ssh://git@github.com/RGBCube/GHostty";
-    };
-
-    ghosttyModule = {
-      url = "github:clo4/ghostty-hm-module";
-    };
-
     nuScripts = {
-      url   = "github:nushell/nu_scripts";
+      url = "github:nushell/nu_scripts";
       flake = false;
     };
 
     fenix = {
-      url                    = "github:nix-community/fenix";
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zls = {
-      url                    = "github:zigtools/zls";
+      url = "github:zigtools/zls";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     tools = {
-      url                    = "github:RGBCube/FlakeTools";
+      url = "github:RGBCube/FlakeTools";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -81,7 +60,6 @@
     nixSuper,
     nixpkgs,
     homeManager,
-    ghosttyModule,
     nuScripts,
     fenix,
     tools,
@@ -93,52 +71,58 @@
     ulib = import ./lib lib;
 
     configuration = host: system: let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {inherit system;};
 
-      upkgs = { inherit nuScripts; } // (lib.genAttrs
-        [ "nixSuper" "hyprland" "hyprpicker" "ghostty" "zls" "neovim" ]
-        (name: inputs.${name}.packages.${system}.default));
+      upkgs =
+        {inherit nuScripts;}
+        // (lib.genAttrs
+          ["nixSuper" "hyprland" "hyprpicker" "zls"]
+          (name: inputs.${name}.packages.${system}.default));
 
-      theme = themes.custom (themes.raw.everforest-dark-hard // {
-        corner-radius = 8;
-        border-width  = 2;
+      theme = themes.custom (themes.raw.ayu-dark
+        // {
+          corner-radius = 8;
+          border-width = 2;
 
-        margin  = 6;
-        padding = 8;
+          margin = 6;
+          padding = 8;
 
-        font.size.normal = 12;
-        font.size.big    = 18;
+          font.size.normal = 12;
+          font.size.big = 18;
 
-        font.sans.name    = "Iosevka";
-        font.sans.package = pkgs.iosevka;
+          # font.mono.name    = "Tewi"
+          # font.mono.package = pkgs.tewi-font;
 
-        font.mono.name    = "JetBrainsMono Nerd Font";
-        font.mono.package = (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; });
+          font.sans.name = "Iosevka";
+          font.sans.package = pkgs.iosevka;
 
-        icons.name    = "Gruvbox-Plus-Dark";
-        icons.package = pkgs.callPackage (import ./derivations/gruvbox-icons.nix) {};
-      });
+          font.mono.name = "JetBrainsMono Nerd Font";
+          font.mono.package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+
+          icons.name = "Gruvbox-Plus-Dark";
+          icons.package = pkgs.callPackage (import ./derivations/gruvbox-icons.nix) {};
+        });
 
       defaultConfiguration = {
         environment.defaultPackages = [];
 
-        home-manager.sharedModules   = [ ghosttyModule.homeModules.default ];
-        home-manager.useGlobalPkgs   = true;
+        home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        networking.hostName  = host;
+        networking.hostName = host;
         nixpkgs.hostPlatform = system;
       };
-    in lib.nixosSystem {
-      inherit system;
+    in
+      lib.nixosSystem {
+        inherit system;
 
-      specialArgs = { inherit inputs ulib upkgs theme; };
-      modules     = [
-        homeManager.nixosModules.default
-        defaultConfiguration
-        ./hosts/${host}
-      ];
-    };
+        specialArgs = {inherit inputs ulib upkgs theme;};
+        modules = [
+          homeManager.nixosModules.default
+          defaultConfiguration
+          ./hosts/${host}
+        ];
+      };
 
     configurations = builtins.mapAttrs configuration;
   in {

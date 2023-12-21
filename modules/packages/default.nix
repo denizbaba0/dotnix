@@ -34,11 +34,12 @@
   # whatsapp-for-linux
   xfce.thunar        # File Manager
   vieb               # Vim Browser
-  # nvi                 # Text Editor
+  # nvi              # Text Editor
 
   krita
   obs-studio
   # surf
+  mpv                # Media Player
 
   libreoffice
   hunspellDicts.en_US
