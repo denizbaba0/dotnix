@@ -23,9 +23,32 @@ with ulib;
              --rotate normal    \
              --primary          \
     '';
-    theme_patch = "
-      
-    "
+    theme_patch = ''
+      -static const char black[]         = "";
+      -static const char blue[]          = ""; // focused window border
+      -static const char gray2[]         = ""; // unfocused window border
+      -static const char gray3[]         = "";
+      -static const char gray4[]         = "";
+      -static const char green[]         = "";
+      -static const char orange[]        = "";
+      -static const char pink[]          = "";
+      -static const char red[]           = "";
+      -static const char white[]         = "";
+      -static const char yellow[]        = "";
+      -static const char col_borderbar[] = "";
+      +static const char black[]         = "#${base00}";
+      +static const char blue[]          = "#${base0D}"; // focused window border
+      +static const char gray2[]         = "#${base0}"; // unfocused window border
+      +static const char gray3[]         = "#${base01}";
+      +static const char gray4[]         = "#${base00}";
+      +static const char green[]         = "#${base0C}";
+      +static const char orange[]        = "#${base09}";
+      +static const char pink[]          = "#${base0E}";
+      +static const char red[]           = "#${base08}";
+      +static const char white[]         = "#${base06}";
+      +static const char yellow[]        = "#${base0B}";
+      +static const char col_borderbar[] = "#${base00}";
+    '';
   in
     systemConfiguration {
       hardware.opengl = enabled {
@@ -41,42 +64,41 @@ with ulib;
           package = pkgs.callPackage (import ./recompile.nix) {};
         };
 
-
         displayManager = {
           gdm = enabled {};
           defaultSession = "none+chadwm"; # desktop+wm
-         session = [
-           # https://mynixos.com/nixpkgs/option/services.xserver.displayManager.session
-           {
-             manage = "window"; # desktop or window
-             name = "chadwm";
-             # start = lib.fileContents ./boot.sh;
-             start = ''
-               xrdb merge ~/.Xresources &
-               # xbacklight -set 10 & # TODO: not working (idk if essential)
-               xset r rate 200 50 &
-               dash ~/.config/chadwm/scripts/bar.sh &
-               # draw our wallpaper only if xinit is not set
-               if [ ! -f $XDG_CONFIG_HOME/sxmo/xinit ]; then
-                 ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper} &
-               fi
-               eww daemon & # start eww daemon for faster widget startup
-               ${
-                 if startup_copyq
-                 then "copyq &"
-                 else ""
-               }
-               ${xrandr}
+          session = [
+            # https://mynixos.com/nixpkgs/option/services.xserver.displayManager.session
+            {
+              manage = "window"; # desktop or window
+              name = "chadwm";
+              # start = lib.fileContents ./boot.sh;
+              start = ''
+                xrdb merge ~/.Xresources &
+                # xbacklight -set 10 & # TODO: not working (idk if essential)
+                xset r rate 200 50 &
+                dash ~/.config/chadwm/scripts/bar.sh &
+                # draw our wallpaper only if xinit is not set
+                if [ ! -f $XDG_CONFIG_HOME/sxmo/xinit ]; then
+                  ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper} &
+                fi
+                eww daemon & # start eww daemon for faster widget startup
+                ${
+                  if startup_copyq
+                  then "copyq &"
+                  else ""
+                }
+                ${xrandr}
 
-               # NOTE: picom autostarts in the way It's declared in `default.nix`
+                # NOTE: picom autostarts in the way It's declared in `default.nix`
 
-               while type dwm ; do dwm &> ${logdir} && continue || break; done
-             '';
-           }
-         ];
-         autoLogin = enabled {
-           user = "nixos";
-         };
+                while type dwm ; do dwm &> ${logdir} && continue || break; done
+              '';
+            }
+          ];
+          autoLogin = enabled {
+            user = "nixos";
+          };
         };
       };
     })
