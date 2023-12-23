@@ -5,7 +5,7 @@
   system.stateVersion = "23.05";
 
   users.users.nixos = graphicalUser {
-    description = "DWM based daily driver";
+    description = "orhnk";
     extraGroups = [ "wheel" ];
   };
 })
@@ -42,12 +42,13 @@
   "nvidia"
   "packages"
   "picom"
-  "pipewire"
+  # "pipewire"
   "pueue"
   "python"
   "qt"
   "ripgrep"
   "rust"
+  "rofi"
   "sioyek"
   "ssh"
   "steck"

@@ -8,12 +8,12 @@
 with ulib;
   merge
   (homeConfiguration {
-    # programs.neovim = enabled {
-    #   package = pkgs.neovim-unwrapped;
+    programs.neovim = enabled {
+      package = pkgs.neovim-unwrapped;
     #   vimAlias = true;
     #   viAlias  = true;
-    # };
-    xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
+    };
+    # xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
   })
   (homePackages (with pkgs; [
     # CMAKE

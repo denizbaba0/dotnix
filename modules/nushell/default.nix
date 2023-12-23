@@ -34,6 +34,7 @@
       tree = "tree -CF --dirsfirst";
 
       fd = "rg --files";
+      copy = "xclip -selection clipboard";
       # fgit = "rg --files --hidden | rg -e \"\\.(ignore|git)\""; 
     };
   };

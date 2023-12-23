@@ -14,6 +14,10 @@
   tree
   usbutils
   yt-dlp
+  ffmpeg              # cli image manupilation 
+  timer               # 
+  notify-desktop      # cli desktop nofifier [1]
+  translate-shell     # cli translator
 
   wine
 
@@ -45,3 +49,5 @@
   hunspellDicts.en_US
   hunspellDicts.en_GB-ize
 ]))
+
+# [1]: Used with some nushell scripts (See modules/nushell/scripts/*)

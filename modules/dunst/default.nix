@@ -7,7 +7,7 @@ graphicalConfiguration {
     settings.global = {
       width = "(300, 900)";
 
-      dmenu = "fuzzel --dmenu";
+      dmenu = "rofi -dmenu";
 
       corner_radius      = corner-radius;
       gap_size           = margin;

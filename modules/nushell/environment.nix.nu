@@ -1,7 +1,7 @@
 { nuScripts, theme }: ''
-if (tty) == /dev/tty1 {
-  Hyprland
-}
+# if (tty) == /dev/tty1 {
+#   Hyprland
+# }
 
 $env.PROMPT_INDICATOR           = "";
 $env.PROMPT_INDICATOR_VI_INSERT = "";
@@ -35,4 +35,5 @@ def --wrapped hx [...arguments] {
 }
 
 use ${nuScripts}/modules/background_task/task.nu
+use ${./scripts/cmds.nu} *
 ''

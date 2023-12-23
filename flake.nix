@@ -76,10 +76,10 @@
       upkgs =
         {inherit nuScripts;}
         // (lib.genAttrs
-          ["nixSuper" "hyprland" "hyprpicker" "zls"]
+          ["nixSuper" "zls"]
           (name: inputs.${name}.packages.${system}.default));
 
-      theme = themes.custom (themes.raw.ayu-dark
+      theme = themes.custom (themes.raw.gruvbox-dark-medium
         // {
           corner-radius = 8;
           border-width = 2;
@@ -89,9 +89,6 @@
 
           font.size.normal = 12;
           font.size.big = 18;
-
-          # font.mono.name    = "Tewi"
-          # font.mono.package = pkgs.tewi-font;
 
           font.sans.name = "Iosevka";
           font.sans.package = pkgs.iosevka;

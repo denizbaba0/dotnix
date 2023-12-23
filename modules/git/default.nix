@@ -4,6 +4,8 @@ homeConfiguration {
   programs.nushell.shellAliases = {
     g = "git";
 
+    gi = "git init";
+
     ga  = "git add";
     gaa = "git add ./";
 
@@ -52,8 +54,8 @@ homeConfiguration {
   programs.git = enabled {
     package = pkgs.gitFull;
 
-    userName  = "RGBCube";
-    userEmail = "RGBCube@users.noreply.github.com";
+    userName  = "ocaml-case";
+    userEmail = "utfeightt@gmail.com";
 
     extraConfig = {
       init.defaultBranch   = "master";
