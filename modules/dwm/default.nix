@@ -23,6 +23,21 @@ with ulib;
                --rotate normal    \
                --primary          \
       '';
+      # passed using echo "${theme}" > theme.h
+      dynamic-theme = ''
+        static const char black[]         = \"#${theme.base00}\";
+        static const char blue[]          = \"#${theme.base0D}\"; // focused window border
+        static const char gray2[]         = \"#${theme.base00}\"; // unfocused window border
+        static const char gray3[]         = \"#${theme.base01}\";
+        static const char gray4[]         = \"#${theme.base00}\";
+        static const char green[]         = \"#${theme.base0C}\";
+        static const char orange[]        = \"#${theme.base09}\";
+        static const char pink[]          = \"#${theme.base0E}\";
+        static const char red[]           = \"#${theme.base08}\";
+        static const char white[]         = \"#${theme.base06}\";
+        static const char yellow[]        = \"#${theme.base0B}\";
+        static const char col_borderbar[] = \"#${theme.base00}\";
+      '';
     in
       systemConfiguration {
         hardware.opengl = enabled {

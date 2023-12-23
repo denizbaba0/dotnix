@@ -1,7 +1,8 @@
 {
-  ulib,
+  config,
   pkgs,
   theme,
+  ulib,
   ...
 }:
 with ulib;
@@ -100,7 +101,7 @@ in
 
                   # NOTE: picom autostarts in the way It's declared in `default.nix`
 
-                  while type dwm >/dev/null; do dwm && continue || break; done
+                  while type dwm >/dev/null; do ${config.services.xserver.windowManager.dwm.package}/bin/dwm && continue || break; done
                 '';
               }
             ];

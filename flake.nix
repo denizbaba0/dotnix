@@ -79,7 +79,7 @@
           ["nixSuper" "zls"]
           (name: inputs.${name}.packages.${system}.default));
 
-      theme = themes.custom (themes.raw.gruvbox-dark-medium
+      theme = themes.custom (themes.raw.ayu-dark
         // {
           corner-radius = 8;
           border-width = 2;

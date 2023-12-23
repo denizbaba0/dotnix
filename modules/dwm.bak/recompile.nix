@@ -33,6 +33,9 @@ pkgs.stdenv.mkDerivation {
 
     make dwm
 
+    mkdir bin
+    cp dwm bin/
+
     mv dwm $out
   '';
 }
