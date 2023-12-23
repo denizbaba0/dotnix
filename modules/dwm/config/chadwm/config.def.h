@@ -2,6 +2,15 @@
 
 #include <X11/XF86keysym.h>
 
+/* Apps */
+
+#define TERMINAL_EMULATOR   "kitty"
+#define APP_LAUNCHER        "rofi -show drun"
+#define CLIPBOARD_MANAGER   "greenclip print | rofi -dmenu | xclip -selection clipboard"
+#define SELECTION_TO_EDITOR "kitty sh -c \"xclip -o | nvim -\""
+#define WEB_BROWSER         "vieb"
+
+
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int default_border = 0;   /* to switch back to default border after dynamic border resizing via keybinds */
@@ -28,11 +37,11 @@ static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
 static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
-static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL};
-static const char *light_down[] = {"/usr/bin/light", "-U", "5", NULL};
+static const char *upvol[]          = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[]        = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[]        = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *light_up[]       = { "/usr/bin/light", "-A",              "5",            NULL };
+static const char *light_down[]     = { "/usr/bin/light", "-U",              "5",            NULL };
 static const int new_window_attach_on_end = 0; /*  1 means the new window will attach on the end; 0 means the new window will attach on the front,default is front */
 #define ICONSIZE 19   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
@@ -41,6 +50,7 @@ static const char *fonts[]          = {
   "Iosevka:style:medium:size=12",
   "JetBrainsMono Nerd Font Mono:style:medium:size=19",
   "Cozette",
+  "Tewi"
   "Material Design Icons:style:Regular",
 }; //:size=10
 
@@ -118,21 +128,21 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[]=",      tile },    /* first entry is default */
-    { "[M]",      monocle },
-    { "[@]",      spiral },
-    { "[\\]",     dwindle },
-    { "H[]",      deck },
-    { "TTT",      bstack },
-    { "===",      bstackhoriz },
-    { "HHH",      grid },
-    { "###",      nrowgrid },
-    { "---",      horizgrid },
-    { ":::",      gaplessgrid },
-    { "|M|",      centeredmaster },
+    { "[]=",      tile                   },    /* first entry is default */
+    { "[M]",      monocle                },
+    { "[@]",      spiral                 },
+    { "[\\]",     dwindle                },
+    { "H[]",      deck                   },
+    { "TTT",      bstack                 },
+    { "===",      bstackhoriz            },
+    { "HHH",      grid                   },
+    { "###",      nrowgrid               },
+    { "---",      horizgrid              },
+    { ":::",      gaplessgrid            },
+    { "|M|",      centeredmaster         },
     { ">M>",      centeredfloatingmaster },
-    { "><>",      NULL },    /* no layout function means floating behavior */
-    { NULL,       NULL },
+    { "><>",      NULL                   },    /* no layout function means floating behavior */
+    { NULL,       NULL                   },
 };
 
 /* key definitions */
@@ -164,8 +174,11 @@ static const Key keys[] = {
     {MODKEY,                            XK_u,       spawn,
         SHCMD("maim --select | xclip -selection clipboard -t image/png")},
 
-    { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,            SHCMD("st")},
+    { MODKEY,                           XK_c,       spawn,          SHCMD(APP_LAUNCHER)        },
+    { MODKEY,                           XK_x,       spawn,          SHCMD(CLIPBOARD_MANAGER)   },
+    { MODKEY,                           XK_v,       spawn,          SHCMD(SELECTION_TO_EDITOR) },
+    { MODKEY,                           XK_w,       spawn,          SHCMD(WEB_BROWSER)         },
+    { MODKEY,                           XK_Return,  spawn,          SHCMD(TERMINAL_EMULATOR)   },
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },
@@ -272,7 +285,7 @@ static const Button buttons[] = {
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-    { ClkStatusText,        0,              Button2,        spawn,          SHCMD("st") },
+    { ClkStatusText,        0,              Button2,        spawn,          SHCMD(TERMINAL_EMULATOR) },
 
     /* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */

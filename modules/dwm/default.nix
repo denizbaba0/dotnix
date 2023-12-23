@@ -9,6 +9,7 @@ with ulib;
   merge3
   (
     let
+      clipboard_daemon = "greenclip daemon";
       startup_copyq = true;
       wallpaper = "~/Pictures/wallpapers/stairs.jpg";
       xrandr = ''
@@ -85,12 +86,8 @@ with ulib;
                     ${pkgs.feh}/bin/feh --bg-fill -z ${wallpaper} &
                   fi
                   eww daemon & # start eww daemon for faster widget startup
-                  ${
-                    if startup_copyq
-                    then "copyq &"
-                    else ""
-                  }
-                  ${xrandr}
+                  ${clipboard_daemon} &
+                  ${xrandr} &
 
                   # NOTE: picom autostarts in the way It's declared in `default.nix`
 
@@ -115,7 +112,8 @@ with ulib;
       # chadwm: screenshot tool (used with xclip)
       maim
       xclip # also mentioned in nvim config
-      copyq # clipboard manager
+      # copyq                   # featureful clipboard manager
+      haskellPackages.greenclip #            clipboard manager
 
       # Dash TODO: rewrite these in nushell
       # Needed for small scripts like dwmbar, startup etc.
