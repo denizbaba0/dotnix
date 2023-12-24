@@ -47,3 +47,4 @@
 - DWM dynamic colorschemes doesn't work.
 - Need WeeChat
 - Need to make Firefox cozzier
+- GH-cli extensions. But declerative

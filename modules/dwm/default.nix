@@ -162,4 +162,6 @@ with theme;
 
       # chadwm: build tool: TODO: move these buildInputs to `compile.nix`
       gnumake
+
+      simplescreenrecorder
     ]))

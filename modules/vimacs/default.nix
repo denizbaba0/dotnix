@@ -8,15 +8,16 @@
 with ulib;
   merge
   (homeConfiguration {
-    # programs.neovim = enabled {
-    #   package = pkgs.neovim-unwrapped;
-    #   vimAlias = true;
-    #   viAlias  = true;
-    # };
-    xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
+    programs.neovim = enabled {
+      package = pkgs.neovim-unwrapped;
+      vimAlias = true;
+      viAlias  = true;
+    };
+    # xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
+    xdg.configFile."nvim".source = (pkgs.callPackage ./vimacs.nix {}).nvchad; # FIXME: conflicting with flake
   })
   (homePackages (with pkgs; [
-    upkgs.vimacs
+    # upkgs.vimacs
     # (pkgs.callPackage ./vimacs.nix {})
     # Fancy.
     neovide

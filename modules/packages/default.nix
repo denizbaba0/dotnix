@@ -18,12 +18,13 @@
   timer               # 
   notify-desktop      # cli desktop nofifier [1]
   translate-shell     # cli translator
+  gh
+  # github-copilot-cli # using `gh copilot`
 
   wine
 
   clang_16
   clang-tools_16
-  gh
   go
   jdk
   lld

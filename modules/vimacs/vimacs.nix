@@ -1,30 +1,22 @@
-{ lib, stdenv, pkgs, src }:
+{ stdenv, pkgs, fetchFromGithub }:
 
-let
-  custom = ./config/lua/custom;
-in
-stdenv.mkDerivation {
+{
+nvchad = stdenv.mkDerivation rec {
   pname = "nvchad";
-  version = "1.0.0";
+  version = "";
+  dontBuild = true;
 
   src = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "refs/heads/v2.0";
-    sha256 = "sha256-1gSXfZvu0MR8QwLBzzNDoZGWSpCrD3wWxGFBG7hOU5E=";
+    rev = "c8777040fbda6a656f149877b796d120085cd918";
+    sha256 = "sha256-J4SGwo/XkKFXvq+Va1EEBm8YOQwIPPGWH3JqCGpFnxY=";
   };
 
   installPhase = ''
+    # Fetch the whole repo and put it in $out
     mkdir $out
-    cp -r $src "$out/"
-    mkdir -p "$out/lua/custom"
-    cp -r ${custom}/* "$out/lua/custom/"
+    cp -aR $src/* $out/
   '';
-
-  meta = with lib; {
-    description = "NvChad";
-    homepage = "https://github.com/NvChad/NvChad";
-    platforms = platforms.all;
-    license = licenses.gpl3;
   };
 }
