@@ -16,8 +16,8 @@ with ulib;
     xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
   })
   (homePackages (with pkgs; [
-    # upkgs.vimacs
-    (pkgs.callPackage ./vimacs.nix {})
+    upkgs.vimacs
+    # (pkgs.callPackage ./vimacs.nix {})
     # Fancy.
     neovide
 

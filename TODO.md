@@ -42,3 +42,8 @@
     themes      = "github.com/RGBCube/ThemeNix";
   };
   ```
+
+- Vimacs doesn't work
+- DWM dynamic colorschemes doesn't work.
+- Need WeeChat
+- Need to make Firefox cozzier

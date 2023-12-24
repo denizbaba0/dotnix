@@ -9,6 +9,7 @@
   gnumake,
   theme ? null,
   patches ? [],
+  preInstall ? null,
   pkgs ? import <nixpkgs> {},
 }:
 pkgs.stdenv.mkDerivation {
