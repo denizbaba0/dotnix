@@ -31,6 +31,7 @@
   maven
   vlang
   zig
+  nodejs
 ]))
 
 (graphicalPackages (with pkgs; [
