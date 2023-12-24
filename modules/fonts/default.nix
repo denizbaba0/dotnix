@@ -18,5 +18,7 @@
   noto-fonts-emoji
 
   # Bitmap Fonts
+  cozette
   tewi-font
+  creep
 ]))

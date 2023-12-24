@@ -9,7 +9,8 @@
 interval=0
 
 # load colors
-. ~/.config/chadwm/scripts/bar_themes/gruvbox
+# . ~/.config/chadwm/scripts/bar_themes/gruvbox
+. ~/.config/nix/chadwm/bar/theme
 
 cpu() {
 	cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)

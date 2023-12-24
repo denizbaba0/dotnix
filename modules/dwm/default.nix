@@ -5,7 +5,7 @@
   config,
   ...
 }:
-with ulib;
+with ulib; with theme;
   merge3
   (
     let
@@ -39,6 +39,11 @@ with ulib;
         static const char yellow[]        = \"#${theme.base0B}\";
         static const char col_borderbar[] = \"#${theme.base00}\";
       '';
+      patch = pkgs.writeTextFile {
+        name = "dynamic-theming";
+        text = import ./patches/dynamic-theme.nix.diff {inherit theme;};
+        destination = "dynamic-theming.diff";
+      };
     in
       systemConfiguration {
         hardware.opengl = enabled {
@@ -63,8 +68,10 @@ with ulib;
           };
 
           windowManager.dwm = enabled {
-            package = pkgs.callPackage (import ./recompile.nix) {};
-            # extraPackages = with pkgs; [ i3status i3lock polybar ];
+            package = pkgs.callPackage (import ./recompile.nix) {
+              theme = dynamic-theme;
+              # patches = [patch];
+            };
           };
 
           displayManager = {
@@ -102,11 +109,34 @@ with ulib;
         };
       }
   )
-  (homeConfiguration {
-    home.file.".Xresources".source = ./dotXresources;
-    home.file.".config/chadwm".source = ./config;
-    # using `services` instead of `packages` triggers picom on every boot
-  })
+  (let
+
+      bar-theme = ''
+        black=#${base00}
+        black_dark=#1d2021
+        blue=#${base0D}
+        blue_dark=#458588
+        aqua=#${base0C}
+        aqua_dark=#689d6a
+        green=#${base0B}
+        green_dark=#98971a
+        grey=#${base01}
+        # grey_dark=#3c3836
+        magenta=#${base0E}
+        magenta_dark=#b16286
+        orange=#${base09}
+        orange_dark=#d65d0e
+        red=#${base08}
+        red_dark=#cc241d
+        white=#${base0F}
+        white_dark=#${base0F}
+      '';
+in
+   (homeConfiguration {
+    home.file.".Xresources".source = ./dotXresources; # NOTE
+    xdg.configFile."chadwm".source = ./config;
+    xdg.configFile."nix/chadwm/bar/theme".text = bar-theme;
+  }))
   (homePackages
     (with pkgs; [
       # chadwm: screenshot tool (used with xclip)

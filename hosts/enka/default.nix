@@ -25,6 +25,7 @@
   "dunst"
   "dwm"
   # "emacs" # BROKEN
+  "eww"
   "firefox"
   "fonts"
   # "ghostty"
@@ -36,6 +37,7 @@
   "kmscon"
   "localisation"
   "logind"
+  "matrix"
   "networkmanager"
   "nix"
   "nushell"
@@ -51,6 +53,7 @@
   "rofi"
   "sioyek"
   "ssh"
+  "st"
   "steck"
   "sudo"
   "vimacs"

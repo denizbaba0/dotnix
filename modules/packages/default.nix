@@ -39,6 +39,7 @@
   xfce.thunar        # File Manager
   vieb               # Vim Browser
   # nvi              # Text Editor
+  ranger
 
   krita
   obs-studio

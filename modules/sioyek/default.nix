@@ -8,7 +8,7 @@ homeConfiguration {
     config = {
       "startup_commands" = "toggle_custom_color;toggle_statusbar";
 
-      # GRUVBOX
+      # GRUVBOX TODO: use theme
       "custom_color_contrast" = "0.3";
       "custom_color_mode_empty_background_color" = "#1d2021";
       "page_separator_color" = "#1d2021";

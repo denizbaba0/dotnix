@@ -18,6 +18,10 @@
   };
 
   inputs = {
+    vimacs = {
+      url = "github:orhnk/vimacs-flake";
+    };
+
     nixSuper = {
       url = "github:privatevoid-net/nix-super";
     };
@@ -76,7 +80,7 @@
       upkgs =
         {inherit nuScripts;}
         // (lib.genAttrs
-          ["nixSuper" "zls"]
+          ["nixSuper" "zls" "vimacs" "iamb"]
           (name: inputs.${name}.packages.${system}.default));
 
       theme = themes.custom (themes.raw.ayu-dark
@@ -92,6 +96,9 @@
 
           font.sans.name = "Iosevka";
           font.sans.package = pkgs.iosevka;
+
+          # font.mono.name = "creep";
+          # font.mono.package = pkgs.creep;
 
           font.mono.name = "JetBrainsMono Nerd Font";
           font.mono.package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
