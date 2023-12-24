@@ -7,15 +7,22 @@
 }:
 with ulib;
   merge
-  (homeConfiguration {
-    programs.neovim = enabled {
-      package = pkgs.neovim-unwrapped;
-      vimAlias = true;
-      viAlias  = true;
-    };
-    # xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
-    xdg.configFile."nvim".source = (pkgs.callPackage ./vimacs.nix {}).nvchad; # FIXME: conflicting with flake
-  })
+  (
+    let
+      vimacs = ./config;
+    in (graphicalConfiguration {
+      programs.neovim = enabled {
+        package = pkgs.neovim-unwrapped;
+        vimAlias = true;
+        viAlias = true;
+      };
+      # xdg.configFile."nvim".source = ./config; # FIXME: conflicting with flake
+      # home.file."nvim/lua".source = (pkgs.callPackage ./vimacs.nix { custom = ./config/lua/custom;}).nvchad; # FIXME: conflicting with flake
+      # home.file."nvim/init.lua".source = ./config/init.lua;
+      xdg.configFile."nvim/lua".source = "${vimacs}/lua";
+      xdg.configFile."nvim/init.lua".source = "${vimacs}/init.lua";
+    })
+  )
   (homePackages (with pkgs; [
     # upkgs.vimacs
     # (pkgs.callPackage ./vimacs.nix {})
