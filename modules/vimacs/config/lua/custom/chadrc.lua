@@ -14,7 +14,7 @@ local status = require("custom.utils").status
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "everforest",
+  theme = "dynamic",
   theme_toggle = { "everforest", "everforest" },
   lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 

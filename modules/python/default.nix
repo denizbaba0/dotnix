@@ -4,7 +4,7 @@
   (python311.withPackages (pkgs: with pkgs; [
     pip
     requests
-    howdoi
+    # howdoi # stackoverflow search --bad--
   ]))
   virtualenv
   poetry

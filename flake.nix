@@ -83,7 +83,7 @@
           ["nixSuper" "zls" "vimacs" "iamb"]
           (name: inputs.${name}.packages.${system}.default));
 
-      theme = themes.custom (themes.raw.ayu-dark
+      theme = themes.custom (themes.raw.everforest
         // {
           corner-radius = 8;
           border-width = 2;
