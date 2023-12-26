@@ -46,7 +46,7 @@ with ulib;
     vieb # Vim Browser
     # nvi              # Text Editor
     ranger
-    # surf # The only browser
+    kazam
 
     (surf.overrideAttrs (oldAttrs: {
       src = pkgs.fetchFromGitHub {

@@ -12,7 +12,7 @@ configuration{
     display-drun: "   Apps ";
 }
 
-@theme "gruv"
+@theme "dynamic"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;

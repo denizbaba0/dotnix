@@ -12,6 +12,7 @@ local servers = {
   "cmake",         -- CMake
   "nil_ls",        -- Nix
   "taplo",         -- TOML
+  "zls"            -- Zig
 }
 -- stylua: ignore end
 --                                    ^^^^^^^^^^^^^^^^-- TODO: Set up with rust-tools.nvim

@@ -48,3 +48,4 @@
 - Need WeeChat
 - Need to make Firefox cozzier
 - GH-cli extensions. But declerative
+- Theme rofi

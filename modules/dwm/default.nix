@@ -71,7 +71,6 @@ with theme;
           windowManager.dwm = enabled {
             package = pkgs.callPackage (import ./recompile.nix) {
               theme = system-theme;
-              # patches = [patch];
             };
           };
 

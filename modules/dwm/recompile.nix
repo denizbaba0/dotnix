@@ -15,7 +15,13 @@
 pkgs.stdenv.mkDerivation {
   name = "dwm";
 
-  src = ./config;
+  src = pkgs.symlinkJoin {
+    name = "vimacs";
+    paths = [
+      (pkgs.writeTextDir "chadwm/themes/dynamic.h" theme)
+      ./config
+    ];
+  };
 
   buildInputs = [imlib2 libX11 libXft libXinerama gnumake acpi];
 

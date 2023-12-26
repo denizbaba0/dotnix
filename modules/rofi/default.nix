@@ -4,8 +4,29 @@
   theme,
   ...
 }:
-with ulib; (homeConfiguration {
-  xdg.configFile."rofi".source = ./config;
+with theme.withHashtag;
+with ulib; let
+  rofi-theme = ''
+    * {
+        bg-col:  ${base00};
+        bg-col-light: ${base01};
+        border-col: ${base02};
+        selected-col: ${base03};
+        blue: ${base0D};
+        fg-col: ${base05};
+        fg-col2: ${base08};
+        grey: ${base03};
+        width: 600;
+    }
+  '';
+in (homeConfiguration {
+  xdg.configFile."rofi".source = pkgs.symlinkJoin {
+    name = "rofi";
+    paths = [
+      (pkgs.writeTextDir "themes/dynamic.rasi" rofi-theme)
+      ./config
+    ];
+  };
   programs.rofi = enabled {
     # font = theme.font.sans.name;
     # plugins = with pkgs; [
